@@ -5,29 +5,23 @@ import {
   Center,
   Flex,
   FormControl,
-  FormLabel,
   Heading,
-  Img,
   Input,
 } from "@chakra-ui/react";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { HumanChatMessage, SystemChatMessage } from "langchain/schema";
-import { useState } from "react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { FaUser } from "react-icons/fa";
-import Alfred from "../assets/alfred.jpg";
 
 import FadeInText from "@components/FadeInText";
 import { AdditionalDetails, CV, promptInjection } from "Utils/cv";
 
 const chat = new ChatOpenAI({
-  temperature: 0,
+  temperature: 1,
   openAIApiKey: "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",
+  maxTokens: 150,
 });
-
-// async function handleUserInput(input) {
-//   const response = await chat.call([new HumanChatMessage(input)]);
-//   return response.text;
-// }
 
 async function handleUserInput(input) {
   const response = await chat.call([
@@ -71,13 +65,43 @@ export default function Chat() {
     setIsLoading(false);
   }
 
+  const chatContainerRef = useRef(null);
+
+  useEffect(() => {
+    // Scroll to the bottom of the chat container on component update
+    chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    console.log(
+      "🚀 ~ file: chat.js:73 ~ useEffect ~ chatContainerRef:",
+      chatContainerRef
+    );
+  }, [messages]); // Assuming `messages` is the state representing chat messages
+
   return (
     <Center h="100vh" w="100vw">
       <Box width={"100%"} maxW="800px" bg="gray.100" p={4} borderRadius="md">
         <Heading as="h1" mb={4}>
-          Chat App
+          Sam Morgan-Tyghe Chat CV
         </Heading>
-        <Flex direction="column" gap="13px" height="500px" overflow="auto">
+        <Flex
+          direction="column"
+          gap="13px"
+          height="500px"
+          overflow="auto"
+          ref={chatContainerRef}
+          onScroll={() => {
+            // Check if user has scrolled near the bottom (within 10 pixels)
+            const isNearBottom =
+              chatContainerRef.current.scrollHeight -
+                chatContainerRef.current.scrollTop <=
+              chatContainerRef.current.clientHeight + 10;
+
+            if (isNearBottom) {
+              // Scroll to the bottom if near the bottom
+              chatContainerRef.current.scrollTop =
+                chatContainerRef.current.scrollHeight;
+            }
+          }}
+        >
           <Flex direction="column" gap="13px">
             {messages.map((message, index) => (
               <Box
@@ -90,12 +114,24 @@ export default function Chat() {
                 {message.role === "user" ? (
                   <Avatar
                     name="user"
-                    icon={<Img src={Alfred} />}
+                    icon={<FaUser />}
                     bg="teal.400"
                     color="white"
                   />
                 ) : (
-                  <Avatar name="Alfred" bg="gray.200" color="black" />
+                  <Avatar
+                    name="Alfred"
+                    src={
+                      <Image
+                        src="/alfred.jpg"
+                        alt="Avatar"
+                        width={50}
+                        height={50}
+                      />
+                    }
+                    bg="gray.200"
+                    color="black"
+                  />
                 )}
                 <FadeInText
                   py="13px"
@@ -111,7 +147,7 @@ export default function Chat() {
               <Input
                 type="text"
                 value={input}
-                placeholder="Type your message..."
+                placeholder="Ask me anything about Sam..."
                 onChange={(e) => setInput(e.target.value)}
               />
             </FormControl>
