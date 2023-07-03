@@ -2,7 +2,7 @@
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { HumanChatMessage, SystemChatMessage } from "langchain/schema";
 
-exports.handler = async function (event, context) {
+export const handler = async function (event, context) {
   const openAIApiKey = process.env.OPENAIKEY;
 
   const chat = new ChatOpenAI({
