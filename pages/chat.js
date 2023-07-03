@@ -11,7 +11,7 @@ import {
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { HumanChatMessage, SystemChatMessage } from "langchain/schema";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { FaUser } from "react-icons/fa";
 
 import FadeInText from "@components/FadeInText";
@@ -19,7 +19,7 @@ import { AdditionalDetails, CV, promptInjection } from "Utils/cv";
 
 const chat = new ChatOpenAI({
   temperature: 1,
-  openAIApiKey: "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",
+  openAIApiKey: "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",
   maxTokens: 150,
 });
 
@@ -66,15 +66,18 @@ export default function Chat() {
   }
 
   const chatContainerRef = useRef(null);
+  const [autoScroll, setAutoScroll] = useState(true); // Add this state
 
-  useEffect(() => {
-    // Scroll to the bottom of the chat container on component update
-    chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-    console.log(
-      "🚀 ~ file: chat.js:73 ~ useEffect ~ chatContainerRef:",
-      chatContainerRef
-    );
-  }, [messages]); // Assuming `messages` is the state representing chat messages
+  useLayoutEffect(() => {
+    const scrollChatToBottom = () => {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    };
+
+    if (autoScroll) {
+      scrollChatToBottom();
+    }
+  }, [messages, autoScroll]);
 
   return (
     <Center h="100vh" w="100vw">
@@ -89,16 +92,18 @@ export default function Chat() {
           overflow="auto"
           ref={chatContainerRef}
           onScroll={() => {
-            // Check if user has scrolled near the bottom (within 10 pixels)
-            const isNearBottom =
-              chatContainerRef.current.scrollHeight -
-                chatContainerRef.current.scrollTop <=
-              chatContainerRef.current.clientHeight + 10;
+            // Adjust this event handler
+            if (autoScroll) {
+              // Only change autoScroll state if it's currently true
+              const isAtBottom =
+                chatContainerRef.current.scrollHeight -
+                  chatContainerRef.current.scrollTop <=
+                chatContainerRef.current.clientHeight + 10;
 
-            if (isNearBottom) {
-              // Scroll to the bottom if near the bottom
-              chatContainerRef.current.scrollTop =
-                chatContainerRef.current.scrollHeight;
+              if (!isAtBottom) {
+                // If not at the bottom, disable auto-scroll
+                setAutoScroll(false);
+              }
             }
           }}
         >
@@ -136,6 +141,13 @@ export default function Chat() {
                 <FadeInText
                   py="13px"
                   text={`${message.role}: ${message.content}`}
+                  onTextRevealComplete={() => {
+                    if (autoScroll) {
+                      // Add this condition
+                      chatContainerRef.current.scrollTop =
+                        chatContainerRef.current.scrollHeight;
+                    }
+                  }}
                 />
               </Box>
             ))}
