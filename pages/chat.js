@@ -113,6 +113,8 @@ export default function Chat() {
                 bg={message.role === "user" ? "teal.400" : "gray.200"}
                 color={message.role === "user" ? "white" : "black"}
                 display="flex"
+                gap="13px"
+                alignItems="center"
               >
                 {message.role === "user" ? (
                   <Avatar
@@ -120,21 +122,37 @@ export default function Chat() {
                     icon={<FaUser />}
                     bg="teal.400"
                     color="white"
+                    border="2px solid white"
+                    width={"50px"}
+                    height={"50px"}
+                    minW={"50px"}
+                    minH={"50px"}
+                    position="relative"
+                    m="13px"
+                    rounded="4px"
                   />
                 ) : (
-                  <Avatar
-                    name="Alfred"
-                    src={
-                      <Image
-                        src="/alfred.jpg"
-                        alt="Avatar"
-                        width={50}
-                        height={50}
-                      />
-                    }
-                    bg="gray.200"
-                    color="black"
-                  />
+                  <Box
+                    width={"50px"}
+                    height={"50px"}
+                    minW={"50px"}
+                    minH={"50px"}
+                    position="relative"
+                    m="13px"
+                    rounded="4px"
+                    sx={{
+                      "&>span": {
+                        borderRadius: "4px",
+                      },
+                    }}
+                  >
+                    <Image
+                      borderRadius="4px"
+                      src="/alfred.jpg"
+                      alt="Avatar"
+                      layout="fill"
+                    />
+                  </Box>
                 )}
                 <FadeInText
                   py="13px"

@@ -16,8 +16,6 @@ export default async function handler(req, res) {
   const response = await chat.call([
     new SystemChatMessage(promptInjection),
     new HumanChatMessage(input),
-    new SystemChatMessage(CV),
-    new SystemChatMessage(AdditionalDetails),
   ]);
 
   res.status(200).json({ result: response.text });

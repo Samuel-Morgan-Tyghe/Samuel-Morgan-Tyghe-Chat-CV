@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { TypeAnimation } from "react-type-animation";
 
 const FadeInText = ({ text, onTextRevealComplete, ...additionalProps }) => {
   const [displayText, setDisplayText] = useState("");
@@ -9,34 +10,37 @@ const FadeInText = ({ text, onTextRevealComplete, ...additionalProps }) => {
     for (let i = 0; i < text.length; i++) {
       setTimeout(() => {
         setDisplayText((prevText) => {
-          if (i === text.length - 1) {
-            // when it's the last character
-            onTextRevealComplete(); // call the function passed from props
-          }
           return prevText + text[i];
         });
       }, delay);
-      delay += 50; // Adjust the delay between characters
+      delay += 5; // Adjust the delay between characters
     }
   }, [text, onTextRevealComplete]);
 
+  const [showCursor, setShowCursor] = useState(true);
   return (
     <Box
       overflow="hidden"
       style={{
-        maxHeight: displayText ? "1000px" : "0", // Adjust the max-height value
+        // maxHeight: displayText ? "1000px" : "0", // Adjust the max-height value
         transition: "max-height 0.3s ease-out", // Adjust the transition duration and timing function
       }}
       {...additionalProps}
     >
-      <Box
-        as="span"
-        animation="fade-in 1s linear forwards"
-        whiteSpace="pre-wrap"
-      >
-        {/* {displayText} */}
-        {text}
-      </Box>
+      <TypeAnimation
+        cursor={showCursor}
+        style={{ whiteSpace: "pre-line", display: "block" }}
+        sequence={[
+          () => onTextRevealComplete(),
+          () => setShowCursor(true),
+          text,
+          1000,
+          () => setShowCursor(false),
+          () => onTextRevealComplete(),
+        ]}
+        speed={99}
+        repeat={0}
+      />
     </Box>
   );
 };

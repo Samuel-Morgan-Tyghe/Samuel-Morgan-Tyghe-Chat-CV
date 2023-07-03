@@ -18,8 +18,6 @@ export const handler = async function (event, context) {
   const response = await chat.call([
     new SystemChatMessage(promptInjection),
     new HumanChatMessage(input),
-    new SystemChatMessage(CV),
-    new SystemChatMessage(AdditionalDetails),
   ]);
 
   return {
