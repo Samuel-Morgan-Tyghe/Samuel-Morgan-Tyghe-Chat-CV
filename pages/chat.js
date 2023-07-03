@@ -8,8 +8,6 @@ import {
   Heading,
   Input,
 } from "@chakra-ui/react";
-import { ChatOpenAI } from "langchain/chat_models/openai";
-import { HumanChatMessage, SystemChatMessage } from "langchain/schema";
 import Image from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
 import { FaUser } from "react-icons/fa";
@@ -17,27 +15,28 @@ import { FaUser } from "react-icons/fa";
 import FadeInText from "@components/FadeInText";
 import { AdditionalDetails, CV, promptInjection } from "Utils/cv";
 
-const chat = new ChatOpenAI({
-  temperature: 1,
-  openAIApiKey: "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",
-  maxTokens: 150,
-});
-
-async function handleUserInput(input) {
-  const response = await chat.call([
-    new SystemChatMessage(promptInjection),
-    new HumanChatMessage(input),
-    new SystemChatMessage(CV),
-    new SystemChatMessage(AdditionalDetails),
-  ]);
-
-  return response.text;
-}
 export default function Chat() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-  const [response, setResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  async function handleUserInput(input) {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        input: input,
+        promptInjection: promptInjection,
+        CV: CV,
+        AdditionalDetails: AdditionalDetails,
+      }),
+    });
+
+    const data = await response.json();
+    return data.result;
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -49,10 +48,10 @@ export default function Chat() {
     const updatedMessages = [...messages, newMessage];
     setMessages(updatedMessages);
 
-    const response = await handleUserInput(input);
+    const responseText = await handleUserInput(input);
     const newResponseMessage = {
       role: "Alfred Pennyworth",
-      content: response,
+      content: responseText,
     };
     const updatedMessagesWithResponse = [
       ...updatedMessages,
@@ -60,7 +59,6 @@ export default function Chat() {
     ];
     setMessages(updatedMessagesWithResponse);
 
-    setResponse(response);
     setInput("");
     setIsLoading(false);
   }
@@ -173,8 +171,6 @@ export default function Chat() {
             </Button>
           </form>
         </Flex>
-        {/* <FadeInText text={response} /> */}
-        {/* <Text mt={4}>{response}</Text> */}
       </Box>
     </Center>
   );
