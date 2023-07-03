@@ -13,12 +13,19 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { FaUser } from "react-icons/fa";
 
 import FadeInText from "@components/FadeInText";
-import { AdditionalDetails, CV, promptInjection } from "Utils/cv";
+import { getJobSpec } from "Utils/jobSpec";
+import { useRouter } from "next/router";
+import { getPromptInjection } from "Utils/cv";
 
 export default function Chat() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const { jobspec, username } = router.query;
+  const user = (username as string) ?? "user";
+
+  const jobSpecString = getJobSpec(jobspec);
 
   async function handleUserInput(input) {
     const response = await fetch("/api/chat", {
@@ -28,9 +35,7 @@ export default function Chat() {
       },
       body: JSON.stringify({
         input: input,
-        promptInjection: promptInjection,
-        CV: CV,
-        AdditionalDetails: AdditionalDetails,
+        promptInjection: getPromptInjection(jobSpecString, username),
       }),
     });
 
@@ -42,7 +47,7 @@ export default function Chat() {
     e.preventDefault();
     setIsLoading(true);
     const newMessage = {
-      role: "user",
+      role: user,
       content: input,
     };
     const updatedMessages = [...messages, newMessage];
@@ -110,15 +115,15 @@ export default function Chat() {
               <Box
                 key={index}
                 borderRadius="md"
-                bg={message.role === "user" ? "teal.400" : "gray.200"}
-                color={message.role === "user" ? "white" : "black"}
+                bg={message.role === user ? "teal.400" : "gray.200"}
+                color={message.role === user ? "white" : "black"}
                 display="flex"
                 gap="13px"
                 alignItems="center"
               >
-                {message.role === "user" ? (
+                {message.role === user ? (
                   <Avatar
-                    name="user"
+                    name={user}
                     icon={<FaUser />}
                     bg="teal.400"
                     color="white"
@@ -146,12 +151,7 @@ export default function Chat() {
                       },
                     }}
                   >
-                    <Image
-                      borderRadius="4px"
-                      src="/alfred.jpg"
-                      alt="Avatar"
-                      layout="fill"
-                    />
+                    <Image src="/alfred.jpg" alt="Avatar" layout="fill" />
                   </Box>
                 )}
                 <FadeInText

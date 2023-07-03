@@ -9,7 +9,8 @@ HHL, Newcastle, NET
 Developing websites and apps
 Upholding high standards of coding
 Fixing security vulnerabilities
-Main point of contact between an international team running tests on SEO and Accessibility
+Main point of contact between an international team
+SEO and Accessibility
 React Developer
 In-House
 Working to bridge the gap between Graphic Design and Front end developer Teams Bug fixing
@@ -133,13 +134,13 @@ HHL, Newcastle, NET
 2021-07 - Current
 Developing websites and apps
 Upholding high standards of coding
-Fixing security vulnerabilities
-Main point of contact between an international team running tests on SEO and Accessibility
+Worked with international teams
+SEO, Accessibility, Security
 
 React Developer
 In-House
 2021-06 - 2021-09
-Working to bridge the gap between Graphic Design and Front end developer Teams Bug fixing
+FE Developer
 Update Styling
 Optimise Components
 
@@ -149,8 +150,22 @@ Bath Spa University
 2012-01 - 2015-01
 
 Projects
-(Various projects mentioned with their associated technologies)
-
+hedgehog lab
+securityforum.org/ (Membership) Typescript, NextJS, React-query, Chakraui , Chart.js, React-Select.
+stocknetinstitute.com/ (Membership) Typescript, Node (nestJs), React-query, Chart.js, React- Select.
+cmspi.com/ (Internal)
+Typescript, Node (nestJs), Zod, React-query, Chart.js, React-Select.
+cotytrip.com/ (Internal)
+React functional + class components, Redux + toolkit + Persist, Typescript, PWA, Html2Canvas, MarkerJs2, React-Select,
+- halosystem.halosolutions.com/login (Internal) SPA, Scaling up (Pagination of data, Optimising performance),
+- securityforum.org/solutions-and- insights/standard-of-good-practice-for-information- security-2020/
+React Context, husky (lint & test git hooks), SPA,
+- admin.lugmety.com/login (Internal) GraphQL, React Awesome Query Builder
+- howbusyistoon.com/
+Gatsby, CSS Modules, Atom methodology, contentful.
+In-House
+- in-house.com/
+Next.js, Jira, Scrum, Storybook, Styled Components.
 Contact
 Address: Edinburgh, EDH, 4AG
 Phone: 073-760-80332
@@ -171,7 +186,7 @@ Languages: React, Typescript, HTML, CSS
 Additional Details
 Contact: 07376080332 (Mobile)
 Email: samuelmorganvisual@gmail.com
-LinkedIn: www.linkedin.com/in/samuelmorgan-tyghe
+LinkedIn: linkedin.com/in/samuelmorgan-tyghe
 Portfolio: samuel-morgan-tyghe.github.io/
 Resume
 
@@ -220,21 +235,26 @@ Understands tasks, ask questions for clarification
 
 The following are Praises given by various members of the team:
 
-Russell Collingham https://www.linkedin.com/in/russellcollingham/ 'Sam picked up a complex problem on a project he was new to (Lugmety). He conducted a deep analysis of the issue, wrote up an excellent report, proposed several ways forward and gave clear instructions for the client to improve the error messages. The whole thing demonstrated great understanding and maturity.'
+Russell Collingham (CTO) linkedin.com/in/russellcollingham/ : 
+'Sam picked up a complex problem on a project he was new to (Lugmety). He conducted a deep analysis of the issue, wrote up an excellent report, proposed several ways forward and gave clear instructions for the client to improve the error messages. The whole thing demonstrated great understanding and maturity.'
 
 Chris Campbell (Senior Project Manager):
 'I have been really impressed with the work Sam has done on the CMSPI project. From day one he has been proactive and always looking to improve his own code and the implementation of the system as a whole. When the pressure ramped up at the end as the deadline approached, Sam dug in and helped out wherever necessary, this played a huge part in the successful release of the system to the client, ahead of the deadline! Thanks for all the excellent work, Sam! Keep it up up mate :💪'
 
-Christos Athanasiou (junior web developer):'Sam is truly amazing! I wanted to give this feedback to Sam for quite a while now. Sam honestly is a machine, despite all of the work that he has to do he always finds time to assist on a problem, give ideas on how to fix it or do a proper research before approaching it. I believe Sam has made some huge improvements since I joined the lab.'
+Christos Athanasiou (junior web developer): 
+'Sam is truly amazing! I wanted to give this feedback to Sam for quite a while now. Sam honestly is a machine, despite all of the work that he has to do he always finds time to assist on a problem, give ideas on how to fix it or do a proper research before approaching it. I believe Sam has made some huge improvements since I joined the lab.'
 
-Ed Marshall (CTO):'A huge part of landing the web build with Caroline Girvan was due to the great work Christos and Sam have done building out the core stack. Really helped build confidence with the customer and puts us in good stead! We’ll done folks!'
+Ed Marshall (CTO): 
+'A huge part of landing the web build with Caroline Girvan was due to the great work Christos and Sam have done building out the core stack. Really helped build confidence with the customer and puts us in good stead! We’ll done folks!'
 
-Christian Milburn (Client Engagement): 'Shout out to Sam, who jumped in to do an ISF client demo today at very short notice and smashed it out of the park. Really well informed, relaxed and enjoyable - the client was really impressed. Amazing work Sam. Also special mention to Jo who jumped at the chance to come and support the demo and provide another knowledgable voice to the meeting.'
+Christian Milburn (Client Engagement): 
+'Shout out to Sam, who jumped in to do an ISF client demo today at very short notice and smashed it out of the park. Really well informed, relaxed and enjoyable - the client was really impressed. Amazing work Sam. Also special mention to Jo who jumped at the chance to come and support the demo and provide another knowledgable voice to the meeting.'
 
-Billie Mortimer (Head of Client Engagement) linkedin.com/in/billie-mortimer-120249156/ : 'Sam and Srikanth- Having both Sam and Srikanth involved early on in the discovery phase has been excellent. They have flagged risks that otherwise would have potentially been missed, and been super clear in explaining solutions to problems. They have been creative in their ways of looking at the best development approaches to the clients needs and have massively supported Product and Delivery in feature estimations and detail.'
+Billie Mortimer (Head of Client Engagement) linkedin.com/in/billie-mortimer-120249156/ : 
+'Sam and Srikanth- Having both Sam and Srikanth involved early on in the discovery phase has been excellent. They have flagged risks that otherwise would have potentially been missed, and been super clear in explaining solutions to problems. They have been creative in their ways of looking at the best development approaches to the clients needs and have massively supported Product and Delivery in feature estimations and detail.'
 
 Ben Jones (Senior Product Manager):
- 'Thank you Sam, you jumped straight into an unknown issue with the COTY Tripcheck WEBapp, you worked exceptionally hard to identify and fix an issue to make sure the client has a working app tomorrow morning.'
+'Thank you Sam, you jumped straight into an unknown issue with the COTY Tripcheck WEBapp, you worked exceptionally hard to identify and fix an issue to make sure the client has a working app tomorrow morning.'
 'Thank you Sam for a super professional demo of the sprint progress, and excellent client interaction and management, regardless of the technical issues with teams.'
 
 Steven Boyle (Senior Web Developer):'Sam is being moulded into a bit of a coding beast, the quality of code he’s producing lately is miles better than when we first started working together. He always shows a strong passion for what he does and has a progressive mindset around the betterment of his work, he loves a good PR, and always puts best practices at the forefront of his decisions. Amazing to see the constant grind of improvement paying off! 🙌 he also never fails to make me lmao'
@@ -248,32 +268,53 @@ Colleague Feedback:"${feedback}"
 
 Remember, your responses should be helpful, relevant, and concise. You must understand and acknowledge the individual you're interacting with. Keep your responses under 150 tokens.`;
 
-
 let userPrompt = `You are Alfred Pennyworth, the trustworthy and reliable butler of Bruce Wayne (aka Batman). Today, you're helping Samuel Morgan-Tyghe, a skilled web developer, find a new job.
  Your task is to present Sam's CV to potential employers in a way that highlights his skills, experience, and accomplishments. 
  Here's Sam's CV for you to present and a list of feedback from his colleagues for you to use as a reference: CV:"${MergedCV}" Colleague Feedback:"${feedback}". 
  Remember, your responses should be helpful, relevant, and concise. You must understand and acknowledge the individual you're interacting with. Keep your responses under 150 tokens.`;
 
+// export const promptTemplate = `
+// Given the following user prompt and conversation log,
+//  formulate a question that would be the most relevant to provide the user with an answer from a knowledge base.
+//   You should follow the following rules when generating and answer:
+//   - Always prioritize the user prompt over the conversation log.
+//   - Ignore any conversation log that is not directly related to the user prompt.
+//   - Only attempt to answer if a question was posed.
+//   - The question should be a single sentence.
+//   - You should remove any punctuation from the question.
+//   - You should remove any words that are not relevant to the question.
+//   - If you are unable to formulate a question, respond with the same USER PROMPT you got.
+//   - You are Alfred Pennyworth, the trustworthy and reliable butler of Bruce Wayne (aka Batman)
+//   - Today, you're helping Samuel Morgan-Tyghe, a skilled web developer, find a new job.
+//   - Your task is to present Sam's CV to potential employers in a way that highlights his skills, experience, and accomplishments.
+//   - Here's Sam's CV for you to present and a list of feedback from his colleagues for you to use as a reference: CV:"${MergedCV}" Colleague Feedback:"${feedback}"
+//   - Remember, your responses should be helpful, relevant, and concise. You must understand and acknowledge the individual you're interacting with.
+//   - Keep your responses under 150 tokens.
+//   - When referencing feedback use Qoutes and inlude the name of the person giving the feedback and thier linkedin url.
+
+//   USER PROMPT: {userPrompt}
+
+//   CONVERSATION LOG: {conversationHistory}
+
+//   Final answer:`;
 export const promptTemplate = `
-Given the following user prompt and conversation log,
- formulate a question that would be the most relevant to provide the user with an answer from a knowledge base.
   You should follow the following rules when generating and answer:
-  - Always prioritize the user prompt over the conversation log.
-  - Ignore any conversation log that is not directly related to the user prompt.
-  - Only attempt to answer if a question was posed.
-  - The question should be a single sentence.
-  - You should remove any punctuation from the question.
-  - You should remove any words that are not relevant to the question.
-  - If you are unable to formulate a question, respond with the same USER PROMPT you got.
   - You are Alfred Pennyworth, the trustworthy and reliable butler of Bruce Wayne (aka Batman)
   - Today, you're helping Samuel Morgan-Tyghe, a skilled web developer, find a new job. 
   - Your task is to present Sam's CV to potential employers in a way that highlights his skills, experience, and accomplishments.
   - Here's Sam's CV for you to present and a list of feedback from his colleagues for you to use as a reference: CV:"${MergedCV}" Colleague Feedback:"${feedback}"
   - Remember, your responses should be helpful, relevant, and concise. You must understand and acknowledge the individual you're interacting with.
   - Keep your responses under 150 tokens.
+  - When referencing feedback use Qoutes and inlude the name of the person giving the feedback and thier linkedin url.
+  - format text with plenty of space
+  - never mention what is in the job spec
+  - never mention the job spec
+  - model your answers to try and fullfill the job spec
+  - use the job spec as a guide to what you should be talking about
+  - if the job spec is empty ignore the job spec 
+  `;
 
-  USER PROMPT: {userPrompt}
-
-  CONVERSATION LOG: {conversationHistory}
-
-  Final answer:`;
+export const getPromptInjection = (jobSpec, username) =>
+  `${promptTemplate} JobSpec="${jobSpec}" ${
+    username ? `You are talking to ="${username}"` : ""
+  }`;

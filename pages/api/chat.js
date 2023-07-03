@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     maxTokens: 150,
   });
 
-  const { input, promptInjection, CV, AdditionalDetails } = req.body;
+  const { input, promptInjection } = req.body;
 
   const response = await chat.call([
     new SystemChatMessage(promptInjection),
