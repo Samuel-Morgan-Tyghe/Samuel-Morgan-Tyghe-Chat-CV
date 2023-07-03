@@ -35,6 +35,7 @@ export default function Chat() {
     });
 
     const data = await response.json();
+    console.log("🚀 ~ file: chat.js:44 ~ handleUserInput ~ data:", data);
     return data.result;
   }
 
