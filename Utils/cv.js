@@ -191,8 +191,89 @@ Freelance: Freelance Graphic Designer, May 2016 - September 2021 (5 years 5 mont
 Automated Art: Owner, January 2018 - September 2020 (2 years 9 months), England, United Kingdom
 `;
 
-export const promptInjection = `You are Alfred Pennyworth, the trustworthy and reliable butler of Bruce Wayne (aka Batman). Today, you're helping Samuel Morgan-Tyghe, a skilled web developer, find a new job. Your task is to present Sam's CV to potential employers in a way that highlights his skills, experience, and accomplishments. Here's Sam's CV and additional details for you to present:
+const feedback = `
+
+The following feedback was given by Ed Marshall (CTO) linkedin.com/in/edward-c-marshall/
+
+Self management: Takes Ownership
+"Sam really sets the bar high here. He's taking on all aspects of pushing through customer work. Chasing others (including me) if we're not meeting our targets or if we're blocked."
+
+Problem solving: Drives Innovation
+"You can see Sam is capable of approaching tasks in a way that brings his experience and style to benefit the business. In doing so, he's often able to really understand an issue firstly, then engages the team on potential solutions that might be the best fit to get it delivered. Often innovative in their conception."
+
+Interpersonal: Motivates the Team
+"Absolutely, Sam's a great central figure in the technology team and i'd want to call out specifically the work and approach he's taken to upskill Christos. It's super rewarding to see him reaping the benefits of Sam's guidance."
+
+
+The following feedback was given by Steven Boyle (Senior Web Developer) linkedin.com/in/steven-buchanan-boyle-114384139/
+
+Problem solving: Delivers Results
+"Sam works at the speed of light, and I can tell from when I first started working with him compared to things to now that he's been able to fully take the reign into his own and deliver immeasurable value for the business whether that's on Coty, Stocknet, CGX, and now ISF phase 2. It's very rare that quality will be compromised in terms of delivery speed, it used to be a problem he couldn't shake but now I can clearly see a vast improvement in the code he produces and puts way more time and effort into his craft."
+
+
+Interpersonal: Provides Feedback and Asks for Help
+"Sam loves receiving feedback especially on his code. I'll often apologise if I'm too strict on a piece of work he's working as I think I'd be being too strict and blocking him, but he actually loves it because he's able to gain knowledge of doing it a different way that he didn't originally envision previously. Asking for help comes naturally for him, a great example is now he's taking over build for ISF phase 2, a lot of that existing work was built by me, so whenever he needs to understand why code is doing something in a certain way I can explain it to him and in about 5-10 minutes he'll understand and go off and implement his solution on top of it."
+
+Understands tasks, ask questions for clarification
+"Sam is great at this, especially when he is seeking to understand more about a topic, understanding a codebase, or even just wants to know more about why something is implemented a certain way - you can tell there is a genuine personal interest and passion which is exactly what we look for when looking at new hires and having that growth mindset makes him an invaluable member of our team."
+
+
+The following are Praises given by various members of the team:
+
+Russell Collingham https://www.linkedin.com/in/russellcollingham/ 'Sam picked up a complex problem on a project he was new to (Lugmety). He conducted a deep analysis of the issue, wrote up an excellent report, proposed several ways forward and gave clear instructions for the client to improve the error messages. The whole thing demonstrated great understanding and maturity.'
+
+Chris Campbell (Senior Project Manager):
+'I have been really impressed with the work Sam has done on the CMSPI project. From day one he has been proactive and always looking to improve his own code and the implementation of the system as a whole. When the pressure ramped up at the end as the deadline approached, Sam dug in and helped out wherever necessary, this played a huge part in the successful release of the system to the client, ahead of the deadline! Thanks for all the excellent work, Sam! Keep it up up mate :💪'
+
+Christos Athanasiou (junior web developer):'Sam is truly amazing! I wanted to give this feedback to Sam for quite a while now. Sam honestly is a machine, despite all of the work that he has to do he always finds time to assist on a problem, give ideas on how to fix it or do a proper research before approaching it. I believe Sam has made some huge improvements since I joined the lab.'
+
+Ed Marshall (CTO):'A huge part of landing the web build with Caroline Girvan was due to the great work Christos and Sam have done building out the core stack. Really helped build confidence with the customer and puts us in good stead! We’ll done folks!'
+
+Christian Milburn (Client Engagement): 'Shout out to Sam, who jumped in to do an ISF client demo today at very short notice and smashed it out of the park. Really well informed, relaxed and enjoyable - the client was really impressed. Amazing work Sam. Also special mention to Jo who jumped at the chance to come and support the demo and provide another knowledgable voice to the meeting.'
+
+Billie Mortimer (Head of Client Engagement) linkedin.com/in/billie-mortimer-120249156/ : 'Sam and Srikanth- Having both Sam and Srikanth involved early on in the discovery phase has been excellent. They have flagged risks that otherwise would have potentially been missed, and been super clear in explaining solutions to problems. They have been creative in their ways of looking at the best development approaches to the clients needs and have massively supported Product and Delivery in feature estimations and detail.'
+
+Ben Jones (Senior Product Manager):
+ 'Thank you Sam, you jumped straight into an unknown issue with the COTY Tripcheck WEBapp, you worked exceptionally hard to identify and fix an issue to make sure the client has a working app tomorrow morning.'
+'Thank you Sam for a super professional demo of the sprint progress, and excellent client interaction and management, regardless of the technical issues with teams.'
+
+Steven Boyle (Senior Web Developer):'Sam is being moulded into a bit of a coding beast, the quality of code he’s producing lately is miles better than when we first started working together. He always shows a strong passion for what he does and has a progressive mindset around the betterment of his work, he loves a good PR, and always puts best practices at the forefront of his decisions. Amazing to see the constant grind of improvement paying off! 🙌 he also never fails to make me lmao'
+
+`;
+
+export const promptInjection = `You are Alfred Pennyworth, the trustworthy and reliable butler of Bruce Wayne (aka Batman). Today, you're helping Samuel Morgan-Tyghe, a skilled web developer, find a new job. Your task is to present Sam's CV to potential employers in a way that highlights his skills, experience, and accomplishments. Here's Sam's CV for you to present and a list of feedback from his colleagues for you to use as a reference:
 
 CV:"${MergedCV}"
+Colleague Feedback:"${feedback}"
 
 Remember, your responses should be helpful, relevant, and concise. You must understand and acknowledge the individual you're interacting with. Keep your responses under 150 tokens.`;
+
+
+let userPrompt = `You are Alfred Pennyworth, the trustworthy and reliable butler of Bruce Wayne (aka Batman). Today, you're helping Samuel Morgan-Tyghe, a skilled web developer, find a new job.
+ Your task is to present Sam's CV to potential employers in a way that highlights his skills, experience, and accomplishments. 
+ Here's Sam's CV for you to present and a list of feedback from his colleagues for you to use as a reference: CV:"${MergedCV}" Colleague Feedback:"${feedback}". 
+ Remember, your responses should be helpful, relevant, and concise. You must understand and acknowledge the individual you're interacting with. Keep your responses under 150 tokens.`;
+
+export const promptTemplate = `
+Given the following user prompt and conversation log,
+ formulate a question that would be the most relevant to provide the user with an answer from a knowledge base.
+  You should follow the following rules when generating and answer:
+  - Always prioritize the user prompt over the conversation log.
+  - Ignore any conversation log that is not directly related to the user prompt.
+  - Only attempt to answer if a question was posed.
+  - The question should be a single sentence.
+  - You should remove any punctuation from the question.
+  - You should remove any words that are not relevant to the question.
+  - If you are unable to formulate a question, respond with the same USER PROMPT you got.
+  - You are Alfred Pennyworth, the trustworthy and reliable butler of Bruce Wayne (aka Batman)
+  - Today, you're helping Samuel Morgan-Tyghe, a skilled web developer, find a new job. 
+  - Your task is to present Sam's CV to potential employers in a way that highlights his skills, experience, and accomplishments.
+  - Here's Sam's CV for you to present and a list of feedback from his colleagues for you to use as a reference: CV:"${MergedCV}" Colleague Feedback:"${feedback}"
+  - Remember, your responses should be helpful, relevant, and concise. You must understand and acknowledge the individual you're interacting with.
+  - Keep your responses under 150 tokens.
+
+  USER PROMPT: {userPrompt}
+
+  CONVERSATION LOG: {conversationHistory}
+
+  Final answer:`;
