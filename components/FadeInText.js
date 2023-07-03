@@ -34,7 +34,8 @@ const FadeInText = ({ text, onTextRevealComplete, ...additionalProps }) => {
         animation="fade-in 1s linear forwards"
         whiteSpace="pre-wrap"
       >
-        {displayText}
+        {/* {displayText} */}
+        {text}
       </Box>
     </Box>
   );
