@@ -8,7 +8,7 @@ export const handler = async function (event, context) {
   const chat = new ChatOpenAI({
     temperature: 1,
     openAIApiKey: openAIApiKey,
-    maxTokens: 150,
+    maxTokens: 300,
   });
 
   const { input, promptInjection, CV, AdditionalDetails } = JSON.parse(

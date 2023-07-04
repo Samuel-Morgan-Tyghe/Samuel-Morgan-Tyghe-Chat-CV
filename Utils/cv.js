@@ -312,6 +312,7 @@ export const promptTemplate = `
   - model your answers to try and fullfill the job spec
   - use the job spec as a guide to what you should be talking about
   - if the job spec is empty ignore the job spec 
+  - keep your responses under 150 tokens.
   `;
 
 export const getPromptInjection = (jobSpec, username) =>

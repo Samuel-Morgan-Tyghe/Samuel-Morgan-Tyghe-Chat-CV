@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   const chat = new ChatOpenAI({
     temperature: 1,
     openAIApiKey: openAIApiKey,
-    maxTokens: 150,
+    maxTokens: 300,
   });
 
   const { input, promptInjection } = req.body;
