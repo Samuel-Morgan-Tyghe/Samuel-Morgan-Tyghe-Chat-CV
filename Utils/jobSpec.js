@@ -78,4 +78,4 @@ Good project management skills.`;
 export const getJobSpec = (jobId) =>
   ({
     bidfx: bidfx,
-  }[jobId] ?? defaultGenericJobDesc);
+  }[jobId] ?? "");
