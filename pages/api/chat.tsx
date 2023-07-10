@@ -42,7 +42,7 @@ export default async function handler(req, res) {
     openAIApiKey: openAIApiKey,
   });
 
-  const semanticSearchContext = `These results are from a Samuel morgans CV :"${JSON.stringify(
+  const semanticSearchContext = `These results are from a Samuel morgans CV strictly only use this data to answer any questions :"${JSON.stringify(
     results
   )}"`;
 
