@@ -21,6 +21,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "Utils/cv.js", "chunkedData.js", "Utils/Animate.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "Utils/cv.js", "chunkedData.js", "Utils/Animate.jsx", "netlify/functions/chat.js"],
   "exclude": ["node_modules"]
 }
