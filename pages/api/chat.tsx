@@ -34,19 +34,21 @@ export default async function handler(req, res) {
     "\nIf necessary, utilize the below chat history as additional context:" +
     JSON.stringify(messages);
 
-  const results = await vectorStore.similaritySearch(input, 5);
+  const results = await vectorStore.similaritySearch(input, 10);
 
   const chat = new ChatOpenAI({
+    modelName: "gpt-4",
     temperature: 0.8,
     openAIApiKey: openAIApiKey,
   });
 
-  const semanticSearchContext = `These results are from a Samuel morgans CV :"${results}"`;
+  const semanticSearchContext = `These results are from a Samuel morgans CV :"${JSON.stringify(
+    results
+  )}"`;
 
   const response = await chat.call([
-    new SystemChatMessage(promptInjection),
-    new SystemChatMessage(semanticSearchContext),
-    new HumanChatMessage(input),
+    new SystemChatMessage(promptInjection + semanticSearchContext),
+    new HumanChatMessage("questions : " + input),
     new SystemChatMessage(
       truncate(
         appendHistory,
