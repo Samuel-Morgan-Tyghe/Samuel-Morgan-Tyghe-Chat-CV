@@ -32,9 +32,12 @@ export const handler = async (req, res) => {
   const appendHistory =
     "\nIf necessary, utilize the below chat history as additional context:" +
     JSON.stringify(messages);
-
-  const results = await vectorStore.similaritySearch(input, 5);
-
+  let results = [];
+  try {
+    results = await vectorStore.similaritySearch(input, 5);
+  } catch (error) {
+    console.log("🚀 ~ file: chat.ts:42 ~ handler ~ error:", error);
+  }
   const chat = new ChatOpenAI({
     temperature: 0.8,
     openAIApiKey: openAIApiKey,
