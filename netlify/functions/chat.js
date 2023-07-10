@@ -27,7 +27,7 @@ export const handler = async function (event, context) {
     pineconeIndex,
   });
 
-  const { input, promptInjection, messages } = req.body;
+  const { input, promptInjection, messages } = JSON.parse(event.body);
 
   const appendHistory =
     "\nIf necessary, utilize the below chat history as additional context:" +
