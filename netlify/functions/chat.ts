@@ -53,9 +53,9 @@ export const handler = async (req, res) => {
       truncate(
         appendHistory,
         3500 -
-          promptInjection.split(" ").length -
-          input.split(" ").length -
-          semanticSearchContext.split(" ").length
+          promptInjection?.split(" ").length -
+          input?.split(" ").length -
+          semanticSearchContext?.split(" ").length
       )
     ),
   ]);
