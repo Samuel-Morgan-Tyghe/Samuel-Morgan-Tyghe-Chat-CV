@@ -20,7 +20,7 @@ import FadeInText from "@components/FadeInText";
 import { getPromptInjection } from "Utils/cv";
 import { getJobSpec } from "Utils/jobSpec";
 import { useRouter } from "next/router";
-import ContextModal from "./contextModal";
+import ContextModal from "./ContextModal";
 
 export default function Chat() {
   const [input, setInput] = useState("");
