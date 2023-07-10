@@ -159,7 +159,11 @@ export default function Chat() {
                       },
                     }}
                   >
-                    <Image src="/alfred.jpg" alt="Avatar" layout="fill" />
+                    <Image
+                      src="/images/alfred.jpg"
+                      alt="Avatar"
+                      layout="fill"
+                    />
                   </Box>
                 )}
                 <FadeInText
