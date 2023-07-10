@@ -6,21 +6,16 @@ import {
   Flex,
   FormControl,
   Heading,
-  IconButton,
   Input,
-  Tooltip,
-  useDisclosure,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
 import { FaUser } from "react-icons/fa";
 
-import { InfoIcon } from "@chakra-ui/icons";
 import FadeInText from "@components/FadeInText";
-import { getPromptInjection } from "Utils/cv";
 import { getJobSpec } from "Utils/jobSpec";
 import { useRouter } from "next/router";
-import ContextModal from "./contextModal";
+import { getPromptInjection } from "Utils/cv";
 
 export default function Chat() {
   const [input, setInput] = useState("");
@@ -29,8 +24,6 @@ export default function Chat() {
   const router = useRouter();
   const { jobspec, username } = router.query;
   const user = (username as string) ?? "user";
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [currentDocuments, setCurrentDocuments] = useState(null);
 
   const jobSpecString = getJobSpec(jobspec);
 
@@ -43,11 +36,11 @@ export default function Chat() {
       body: JSON.stringify({
         input: input,
         promptInjection: getPromptInjection(jobSpecString, username),
-        messages: messages,
       }),
     });
 
-    return response?.json();
+    const data = await response?.json();
+    return data.result;
   }
 
   async function handleSubmit(e) {
@@ -60,13 +53,11 @@ export default function Chat() {
     const updatedMessages = [...messages, newMessage];
     setMessages(updatedMessages);
 
-    const response = await handleUserInput(input);
+    const responseText = await handleUserInput(input);
     const newResponseMessage = {
       role: "Alfred Pennyworth",
-      content: response?.result,
-      sourceDocuments: response?.context,
+      content: responseText,
     };
-
     const updatedMessagesWithResponse = [
       ...updatedMessages,
       newResponseMessage,
@@ -128,7 +119,6 @@ export default function Chat() {
                 color={message.role === user ? "white" : "black"}
                 display="flex"
                 gap="13px"
-                p="13px"
                 alignItems="center"
               >
                 {message.role === user ? (
@@ -143,6 +133,7 @@ export default function Chat() {
                     minW={"50px"}
                     minH={"50px"}
                     position="relative"
+                    m="13px"
                     rounded="4px"
                   />
                 ) : (
@@ -152,6 +143,7 @@ export default function Chat() {
                     minW={"50px"}
                     minH={"50px"}
                     position="relative"
+                    m="13px"
                     rounded="4px"
                     sx={{
                       "&>span": {
@@ -173,21 +165,6 @@ export default function Chat() {
                     }
                   }}
                 />
-                {message.sourceDocuments &&
-                  message.sourceDocuments.length > 0 && (
-                    <Tooltip label="Source Documents" ml="auto">
-                      <IconButton
-                        ml="auto"
-                        size="sm"
-                        icon={<InfoIcon />}
-                        onClick={() => {
-                          onOpen();
-                          setCurrentDocuments(message.sourceDocuments);
-                        }}
-                        aria-label={""}
-                      />
-                    </Tooltip>
-                  )}
               </Box>
             ))}
           </Flex>
@@ -213,11 +190,6 @@ export default function Chat() {
           </form>
         </Flex>
       </Box>
-      <ContextModal
-        isOpen={isOpen}
-        onClose={onClose}
-        currentDocuments={currentDocuments}
-      />
     </Center>
   );
 }

@@ -6,17 +6,6 @@ Job title Senior Frontend JS Developer
 Job type Full time, Permanent
 Location London
 Minimum Experience Relevant BSc degree and 5 years’ post graduate experience
-About BidFX
-BidFX is an industry leading provider of electronic Foreign Exchange (FX) trading solutions for the global financial
-marketplace. FX is one of the oldest professions in the world. For as long as there has been cross border trade
-in goods there has been a requirement to exchange currency. This was as true for the merchants of ancient
-times exchanging gold for silver, or shells for beads, as it is today for investors dealing in Renminbi, Euro or
-Bitcoin. We still trade precious metal as currency, and FX bloomed into the world’s largest financial market with
-$6.6 trillion average daily volume. Approximately 45% of global FX business is conducted in London.
-Founded as a start up in 2017, BidFX is a UK-based FinTech that deploys market leading, cloud-based, trading
-technology to provide an Execution Management System (EMS) as a service for institutional clients. BidFX are
-centred in London – where most development is focused – and operate globally with regional offices in
-Singapore, New York, and Sydney. In 2020 BidFX became part of the Singapore Exchange (SGX).
 The Role
 BidFX have an exciting opportunity for Senior Frontend JavaScript Engineers to join our development team and
 create feature-rich user interfaces for FX trading. Our frontend applications are beautifully designed and
@@ -58,7 +47,7 @@ Knowledge and Experience
 • Linux OS environments, ideally including cloud based VMs, containers and Kubernetes.
 • IT security techniques including MFA, SSO, RBAC, and data encryption.
 • Knowledge of the data needs for FX and related financial markets would be an advantage.
-To apply, please email dev-jobs@bidfx.com.`;
+`;
 
 const defaultGenericJobDesc = `
 We are looking for a skilled react.js developer to join our front-end development team. In this role, you will be responsible for developing and implementing user interface components using React.js concepts and workflows such as Redux, Flux, and Webpack. You will also be responsible for profiling and improving front-end performance and documenting our front-end codebase.

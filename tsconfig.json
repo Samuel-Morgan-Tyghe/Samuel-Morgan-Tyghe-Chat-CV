@@ -21,6 +21,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "Utils/cv.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "Utils/cv.js", "chunkedData.js", "Utils/Animate.jsx"],
   "exclude": ["node_modules"]
 }

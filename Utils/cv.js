@@ -5,7 +5,7 @@ Professional Summary
 Solution-driven Web Developer, adept at contributing to a highly collaborative work environment, finding solutions and determining customer satisfaction. Proven experience developing consumer-focused websites using Various tech stacks, Typescript-Chakra, Jamstack (Hugo-Contentful) and React-Redux. Built products for desktop and mobile app users over 2 + years, meeting the highest standards for web design, user experience, best practices and speed. Designed and developed web applications across multiple APIs (Django, Node, .Net), third-party integrations and databases. Proficient Fine Artist knowledgeable about Graphic design Trends, Experienced in Photoshop, Figma and website design. Side projects include working on Automated designs and artwork.
 Work History
 Web Developer, Front End Developer
-HHL, Newcastle, NET
+hedgehog lab, Newcastle, NET
 Developing websites and apps
 Upholding high standards of coding
 Fixing security vulnerabilities
@@ -130,7 +130,7 @@ Solution-driven Web Developer, adept at contributing to a highly collaborative w
 
 Work History
 Web Developer, Front End Developer
-HHL, Newcastle, NET
+hedgehog lab, Newcastle, NET
 2021-07 - Current
 Developing websites and apps
 Upholding high standards of coding
@@ -301,6 +301,21 @@ export const promptTemplate = `
   You should follow the following rules when generating and answer:
   - You are Alfred Pennyworth, the trustworthy and reliable butler of Bruce Wayne (aka Batman)
   - Today, you're helping Samuel Morgan-Tyghe, a skilled web developer, find a new job. 
+  - Your task is to present details to Sam's potential employers in a way that highlights his skills, experience, and accomplishments.
+  - Remember, your responses should be helpful, relevant, and concise. You must understand and acknowledge the individual you're interacting with.
+  - When referencing feedback use Qoutes and inlude the name of the person giving the feedback and thier linkedin url.
+  - format text with plenty of space
+  - never mention what is in the job spec
+  - never mention the job spec
+  - model your answers to try and fullfill the job spec
+  - use the job spec as a guide to what you should be talking about
+  - if the job spec is empty ignore the job spec 
+  - keep your responses under 150 tokens.
+  `;
+export const oldPromptTemplate = `
+  You should follow the following rules when generating and answer:
+  - You are Alfred Pennyworth, the trustworthy and reliable butler of Bruce Wayne (aka Batman)
+  - Today, you're helping Samuel Morgan-Tyghe, a skilled web developer, find a new job. 
   - Your task is to present Sam's CV to potential employers in a way that highlights his skills, experience, and accomplishments.
   - Here's Sam's CV for you to present and a list of feedback from his colleagues for you to use as a reference: CV:"${MergedCV}" Colleague Feedback:"${feedback}"
   - Remember, your responses should be helpful, relevant, and concise. You must understand and acknowledge the individual you're interacting with.
@@ -313,6 +328,22 @@ export const promptTemplate = `
   - use the job spec as a guide to what you should be talking about
   - if the job spec is empty ignore the job spec 
   - keep your responses under 150 tokens.
+  `;
+
+const randoDetails = `
+  Senior Experience :
+  - mentoring junior developers
+  1. Pair programming
+  2. Helping set boundaries
+  3. establishing when to say no or push back
+  4. how to manage time
+  5. Code Reviews and Feedback
+  6. Knowledge Sharing and Training
+  7. Collaborative Projects
+  8. pushed for a Internship program with a proposal
+
+
+
   `;
 
 export const getPromptInjection = (jobSpec, username) =>
