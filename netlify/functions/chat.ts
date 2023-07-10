@@ -5,18 +5,17 @@ import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { HumanChatMessage, SystemChatMessage } from "langchain/schema";
 import { PineconeStore } from "langchain/vectorstores/pinecone";
 
-const openAIApiKey = process.env.OPENAIKEY;
-const pineConeApiKey = process.env.PINEKEY;
-
-const embeddings = new OpenAIEmbeddings({
-  openAIApiKey: openAIApiKey,
-});
-
-function truncate(str, no_words) {
-  return str.split(" ").splice(0, no_words).join(" ");
-}
-
 export const handler = async (req, res) => {
+  const openAIApiKey = process.env.OPENAIKEY;
+  const pineConeApiKey = process.env.PINEKEY;
+
+  const embeddings = new OpenAIEmbeddings({
+    openAIApiKey: openAIApiKey,
+  });
+
+  function truncate(str, no_words) {
+    return str.split(" ").splice(0, no_words).join(" ");
+  }
   const client = new PineconeClient();
   await client.init({
     apiKey: pineConeApiKey,
