@@ -1,4 +1,3 @@
-import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 // import { everything } from "./Utils/FullCV";
 import { PineconeClient } from "@pinecone-database/pinecone";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
@@ -193,44 +192,7 @@ const openAIApiKey = "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";
 
 const embeddings = new OpenAIEmbeddings({
   openAIApiKey: openAIApiKey,
-  // modelName: "text-embedding-ada-002",
 });
-
-// async function splitAndStoreMassiveString() {
-//   // Create a RecursiveCharacterTextSplitter instance
-//   const splitter = new RecursiveCharacterTextSplitter();
-
-//   const massiveString = everything;
-
-//   // Split the massive string into smaller chunks
-//   const chunks = await splitter.splitText(massiveString);
-//   // console.log(chunks);
-//   const ids = chunks.map((_string, index) => {
-//     id: index;
-//   });
-
-//   const vectorStore = await SingleStoreVectorStore.fromTexts(
-//     chunks,
-//     ids,
-//     embeddings,
-//     {
-//       connectionOptions: {
-//         port: 3306,
-//         host: "svc-778aca06-f0ea-41ea-8ea4-fc70da72dd5d-dml.aws-ireland-2.svc.singlestore.com",
-//         user: "admin",
-//         password: "K2XrheoqPq2GSxQyk0Adfbz7DRhWAcy2",
-//         database: "Chat-CV",
-//         table: "Chat_CV_Database",
-//       },
-//     }
-//   );
-
-//   // Add the chunks as documents to the SingleStore vector store
-//   await vectorStore.addDocuments(chunks);
-
-//   // Close the connection pool when you're done
-//   await vectorStore.end();
-// }
 
 async function splitAndStoreMassiveString() {
   const client = new PineconeClient();

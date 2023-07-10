@@ -6,26 +6,11 @@ import { HumanChatMessage, SystemChatMessage } from "langchain/schema";
 import { PineconeStore } from "langchain/vectorstores/pinecone";
 
 const openAIApiKey = process.env.OPENAIKEY;
+const pineConeApiKey = process.env.PINEKEY;
 
 const embeddings = new OpenAIEmbeddings({
   openAIApiKey: openAIApiKey,
 });
-
-const fasterModel = new ChatOpenAI({
-  modelName: "gpt-3.5-turbo",
-  openAIApiKey: openAIApiKey,
-});
-const slowerModel = new ChatOpenAI({
-  modelName: "gpt-4",
-  openAIApiKey: openAIApiKey,
-});
-
-// const memory = new BufferMemory({
-//   memoryKey: "chat_history",
-//   inputKey: "question", // The key for the input to the chain
-//   outputKey: "text", // The key for the final conversational output of the chain
-//   returnMessages: true, // If using with a chat model
-// });
 
 function truncate(str, no_words) {
   return str.split(" ").splice(0, no_words).join(" ");
@@ -34,7 +19,7 @@ function truncate(str, no_words) {
 export default async function handler(req, res) {
   const client = new PineconeClient();
   await client.init({
-    apiKey: "52be664a-a555-4a86-8d6f-6ec9d666c7be",
+    apiKey: pineConeApiKey,
     environment: "asia-southeast1-gcp-free",
   });
   const pineconeIndex = client.Index("chat-cv");
@@ -51,12 +36,9 @@ export default async function handler(req, res) {
 
   const results = await vectorStore.similaritySearch(input, 5);
 
-  const openAIApiKey = process.env.OPENAIKEY;
-
   const chat = new ChatOpenAI({
     temperature: 0.8,
     openAIApiKey: openAIApiKey,
-    maxTokens: 300,
   });
 
   const semanticSearchContext = `These results are from a Samuel morgans CV :"${results}"`;
