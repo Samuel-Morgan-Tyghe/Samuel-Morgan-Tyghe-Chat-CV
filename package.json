@@ -1,7 +1,6 @@
 {
   "name": "nextjs-toolbox",
   "version": "1.0.0",
-  "type": "module",
   "author": "Netlify Inc",
   "contributors": [
     "Tara Manicsic",
