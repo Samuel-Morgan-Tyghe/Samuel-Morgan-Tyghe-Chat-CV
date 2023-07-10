@@ -1,11 +1,8 @@
 // pages/api/chat.js
-import { PineconeClient } from "@pinecone-database/pinecone";
 import { ChatOpenAI } from "langchain/chat_models/openai";
-import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { HumanChatMessage, SystemChatMessage } from "langchain/schema";
-import { PineconeStore } from "langchain/vectorstores/pinecone";
 
-export const handler = async (req, res) => {
+export const handler = async function (event, context) {
   const openAIApiKey = process.env.OPENAIKEY;
   const pineConeApiKey = process.env.PINEKEY;
 
@@ -59,7 +56,6 @@ export const handler = async (req, res) => {
       )
     ),
   ]);
-
   return {
     statusCode: 200,
     body: JSON.stringify({ result: response.text, context: results }),
