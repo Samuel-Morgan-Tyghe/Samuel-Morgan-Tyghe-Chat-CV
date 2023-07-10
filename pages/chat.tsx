@@ -161,8 +161,9 @@ export default function Chat() {
                   >
                     <Image
                       src="/images/alfred.jpg"
-                      alt="Avatar"
+                      alt="Alfred"
                       layout="fill"
+                      objectFit="cover"
                     />
                   </Box>
                 )}
