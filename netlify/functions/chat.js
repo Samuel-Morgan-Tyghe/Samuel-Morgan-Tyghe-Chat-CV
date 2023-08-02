@@ -5,44 +5,44 @@ import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { HumanChatMessage, SystemChatMessage } from "langchain/schema";
 import { PineconeStore } from "langchain/vectorstores/pinecone";
 
+const chat = new ChatOpenAI({
+  modelName: "GPT-3Turbo",
+  temperature: 0.8,
+  openAIApiKey: openAIApiKey,
+});
+
+const openAIApiKey = process.env.OPENAIKEY;
+const pineConeApiKey = process.env.PINEKEY;
+
+const embeddings = new OpenAIEmbeddings({
+  openAIApiKey: openAIApiKey,
+});
+
+function truncate(str, no_words) {
+  return str.split(" ").splice(0, no_words).join(" ");
+}
+
+const client = new PineconeClient();
+client.init({
+  apiKey: pineConeApiKey,
+  environment: "asia-southeast1-gcp-free",
+});
+const pineconeIndex = client.Index("chat-cv");
+
+const vectorStore = PineconeStore.fromExistingIndex(embeddings, {
+  pineconeIndex,
+});
+
 export const handler = async function (event, context) {
   try {
-    const openAIApiKey = process.env.OPENAIKEY;
-    const pineConeApiKey = process.env.PINEKEY;
+    const { input, promptInjection, appendHistory } = JSON.parse(event.body);
 
-    const embeddings = new OpenAIEmbeddings({
-      openAIApiKey: openAIApiKey,
-    });
-
-    function truncate(str, no_words) {
-      return str.split(" ").splice(0, no_words).join(" ");
-    }
-    const client = new PineconeClient();
-    await client.init({
-      apiKey: pineConeApiKey,
-      environment: "asia-southeast1-gcp-free",
-    });
-    const pineconeIndex = client.Index("chat-cv");
-
-    const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
-      pineconeIndex,
-    });
-
-    const { input, promptInjection, messages } = JSON.parse(event.body);
-
-    const appendHistory =
-      "\nIf necessary, utilize the below chat history as additional context:" +
-      JSON.stringify(messages);
     let results = [];
     try {
-      results = await vectorStore.similaritySearch(input, 5);
+      results = await vectorStore.similaritySearch(input, 3);
     } catch (error) {
       console.log("🚀 ~ file: chat.ts:42 ~ handler ~ error:", error);
     }
-    const chat = new ChatOpenAI({
-      temperature: 0.8,
-      openAIApiKey: openAIApiKey,
-    });
 
     const semanticSearchContext = `These results are from a Samuel morgans CV :"${results}"`;
 

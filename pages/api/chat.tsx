@@ -15,24 +15,24 @@ const embeddings = new OpenAIEmbeddings({
 function truncate(str, no_words) {
   return str.split(" ").splice(0, no_words).join(" ");
 }
+const client = new PineconeClient();
+client.init({
+  apiKey: pineConeApiKey,
+  environment: "asia-southeast1-gcp-free",
+});
+const pineconeIndex = client.Index("chat-cv");
+
+
 export default async function handler(req, res) {
+
+  const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
+    pineconeIndex,
+  });
   try {
-    const client = new PineconeClient();
-    await client.init({
-      apiKey: pineConeApiKey,
-      environment: "asia-southeast1-gcp-free",
-    });
-    const pineconeIndex = client.Index("chat-cv");
 
-    const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
-      pineconeIndex,
-    });
+    const { input, promptInjection, appendHistory } = req.body;
 
-    const { input, promptInjection, messages } = req.body;
-
-    const appendHistory =
-      "\nIf necessary, utilize the below chat history as additional context:" +
-      JSON.stringify(messages);
+  
 
     const results = await vectorStore.similaritySearch(input, 10);
 

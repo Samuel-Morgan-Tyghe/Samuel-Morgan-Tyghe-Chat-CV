@@ -55,6 +55,11 @@ export default function Chat() {
   }
   
   async function handleUserInput(input) {
+
+     const appendHistory =
+      "\nIf necessary, utilize the below chat history as additional context:" +
+      JSON.stringify(messages);
+
     const url = "/api/chat";
     const options = {
       method: "POST",
@@ -64,7 +69,7 @@ export default function Chat() {
       body: JSON.stringify({
         input: input,
         promptInjection: getPromptInjection(jobSpecString, username),
-        messages: messages,
+        appendHistory: appendHistory,
       }),
     };
   
