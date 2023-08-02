@@ -27,11 +27,13 @@ export const handler = async function (event, context) {
     pineconeIndex,
   });
 
-  const { input, promptInjection, appendHistory } = JSON.parse(event.body);
+  const { input, promptInjection, appendHistory, retryNumber } = JSON.parse(
+    event.body
+  );
 
   let results = [];
   try {
-    results = await vectorStore.similaritySearch(input, 3);
+    results = await vectorStore.similaritySearch(input, retryNumber);
   } catch (error) {
     console.log("🚀 ~ file: chat.ts:42 ~ handler ~ error:", error);
   }

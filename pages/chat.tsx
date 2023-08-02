@@ -33,9 +33,27 @@ export default function Chat() {
   const [currentDocuments, setCurrentDocuments] = useState(null);
 
   const jobSpecString = getJobSpec(jobspec);
-  async function fetchDataWithRetry(url, options, n = 3) {
+  async function fetchDataWithRetry( n = 10) {
+
+    const appendHistory =
+    "\nIf necessary, utilize the below chat history as additional context:" +
+    JSON.stringify(messages);
+
+  const url = "/api/chat";
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        input: input,
+        promptInjection: getPromptInjection(jobSpecString, username),
+        appendHistory: appendHistory,
+        retryNumber: n,
+      }),
+    };
     try {
-      const response = await fetch(url, options);
+      const response = await fetch(url, options,);
   
       if (!response.ok) { // or check for the status you're interested in like response.status !== 502
         throw new Error('Network response was not ok');
@@ -50,30 +68,16 @@ export default function Chat() {
       // Wait for 1 second before retrying to avoid immediate consecutive calls
       await new Promise(resolve => setTimeout(resolve, 1000));
   
-      return fetchDataWithRetry(url, options, n - 1);
+      return fetchDataWithRetry( n - 1);
     }
   }
   
   async function handleUserInput(input) {
 
-     const appendHistory =
-      "\nIf necessary, utilize the below chat history as additional context:" +
-      JSON.stringify(messages);
-
-    const url = "/api/chat";
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        input: input,
-        promptInjection: getPromptInjection(jobSpecString, username),
-        appendHistory: appendHistory,
-      }),
-    };
+   
   
-    const data = await fetchDataWithRetry(url, options);
+  
+    const data = await fetchDataWithRetry();
     return data;
   }
   
