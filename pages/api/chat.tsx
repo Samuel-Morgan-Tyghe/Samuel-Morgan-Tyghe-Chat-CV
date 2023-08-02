@@ -15,50 +15,54 @@ const embeddings = new OpenAIEmbeddings({
 function truncate(str, no_words) {
   return str.split(" ").splice(0, no_words).join(" ");
 }
-
 export default async function handler(req, res) {
-  const client = new PineconeClient();
-  await client.init({
-    apiKey: pineConeApiKey,
-    environment: "asia-southeast1-gcp-free",
-  });
-  const pineconeIndex = client.Index("chat-cv");
+  try {
+    const client = new PineconeClient();
+    await client.init({
+      apiKey: pineConeApiKey,
+      environment: "asia-southeast1-gcp-free",
+    });
+    const pineconeIndex = client.Index("chat-cv");
 
-  const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
-    pineconeIndex,
-  });
+    const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
+      pineconeIndex,
+    });
 
-  const { input, promptInjection, messages } = req.body;
+    const { input, promptInjection, messages } = req.body;
 
-  const appendHistory =
-    "\nIf necessary, utilize the below chat history as additional context:" +
-    JSON.stringify(messages);
+    const appendHistory =
+      "\nIf necessary, utilize the below chat history as additional context:" +
+      JSON.stringify(messages);
 
-  const results = await vectorStore.similaritySearch(input, 10);
+    const results = await vectorStore.similaritySearch(input, 10);
 
-  const chat = new ChatOpenAI({
-    modelName: "gpt-4",
-    temperature: 0.8,
-    openAIApiKey: openAIApiKey,
-  });
+    const chat = new ChatOpenAI({
+      modelName: "gpt-4",
+      temperature: 0.8,
+      openAIApiKey: openAIApiKey,
+    });
 
-  const semanticSearchContext = `These results are from a Samuel morgans CV strictly only use this data to answer any questions :"${JSON.stringify(
-    results
-  )}"`;
+    const semanticSearchContext = `These results are from a Samuel morgans CV strictly only use this data to answer any questions :"${JSON.stringify(
+      results
+    )}"`;
 
-  const response = await chat.call([
-    new SystemChatMessage(promptInjection + semanticSearchContext),
-    new HumanChatMessage("questions : " + input),
-    new SystemChatMessage(
-      truncate(
-        appendHistory,
-        3500 -
-          promptInjection.split(" ").length -
-          input.split(" ").length -
-          semanticSearchContext.split(" ").length
-      )
-    ),
-  ]);
+    const response = await chat.call([
+      new SystemChatMessage(promptInjection + semanticSearchContext),
+      new HumanChatMessage("questions : " + input),
+      new SystemChatMessage(
+        truncate(
+          appendHistory,
+          3500 -
+            promptInjection.split(" ").length -
+            input.split(" ").length -
+            semanticSearchContext.split(" ").length
+        )
+      ),
+    ]);
 
-  res.status(200).json({ result: response.text, context: results });
+    res.status(200).json({ result: response.text, context: results });
+  } catch (error) {
+    console.error(error);
+    res.status(502).json({ error: 'Server error' });
+  }
 }

@@ -33,9 +33,30 @@ export default function Chat() {
   const [currentDocuments, setCurrentDocuments] = useState(null);
 
   const jobSpecString = getJobSpec(jobspec);
-
+  async function fetchDataWithRetry(url, options, n = 3) {
+    try {
+      const response = await fetch(url, options);
+  
+      if (!response.ok) { // or check for the status you're interested in like response.status !== 502
+        throw new Error('Network response was not ok');
+      }
+  
+      return await response.json();
+  
+    } catch(error) {
+      if (n === 1) throw error;
+      console.log(`Retrying due to ${error.message}. Retries left: ${n-1}`);
+  
+      // Wait for 1 second before retrying to avoid immediate consecutive calls
+      await new Promise(resolve => setTimeout(resolve, 1000));
+  
+      return fetchDataWithRetry(url, options, n - 1);
+    }
+  }
+  
   async function handleUserInput(input) {
-    const response = await fetch("/api/chat", {
+    const url = "/api/chat";
+    const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,10 +66,12 @@ export default function Chat() {
         promptInjection: getPromptInjection(jobSpecString, username),
         messages: messages,
       }),
-    });
-
-    return response?.json();
+    };
+  
+    const data = await fetchDataWithRetry(url, options);
+    return data;
   }
+  
 
   async function handleSubmit(e) {
     e.preventDefault();
