@@ -17,12 +17,12 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { FaUser } from "react-icons/fa";
 
 import { InfoIcon } from "@chakra-ui/icons";
+import DownloadCV from "@components/DownloadCV";
 import FadeInText from "@components/FadeInText";
 import { getPromptInjection } from "Utils/cv";
 import { getJobSpec } from "Utils/jobSpec";
 import { useRouter } from "next/router";
 import ContextModal from "./ContextModal";
-import DownloadCV from "@components/DownloadCV";
 
 export default function Chat() {
   const [input, setInput] = useState("");
@@ -77,7 +77,6 @@ export default function Chat() {
       return fetchDataWithRetry(n - 1);
     }
   }
-
   const fetchData = async (url, body, n = 3) => {
     const options = {
       method: "POST",
@@ -91,21 +90,28 @@ export default function Chat() {
       if (!response.ok) throw new Error("Network response was not ok");
       return await response.json();
     } catch (error) {
-      if (n === 1) throw error;
+      if (n === 1) {
+        console.error(`Failed after 3 retries: ${error.message}`);
+        throw error; // If no retries left, throw the error
+      }
       console.log(`Retrying due to ${error.message}. Retries left: ${n - 1}`);
+
+      // Wait for 1 second before retrying to avoid immediate consecutive calls
       await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Recursively call fetchData with decremented retry count
       return fetchData(url, body, n - 1);
     }
   };
+
   const fetchSimilaritySearch = (input) => {
     return fetchData("/api/similaritySearch", { input });
   };
 
   const fetchChat = (input) => {
-    return fetchData("/api/chat", {
-      input,
-    });
+    return fetchData("/api/chat", { input });
   };
+
 
   async function handleUserInput(input) {
     // Call the similarity search endpoint first
@@ -236,17 +242,22 @@ export default function Chat() {
                     position="relative"
                     rounded="4px"
                     sx={{
-                      "&>span": {
-                        borderRadius: "4px",
+                      '&>span': {
+                        borderRadius: '4px',
                       },
+                      backgroundImage: `url("/images/alfred.jpg")`, // Set background image using CSS
+                      backgroundSize: 'cover', // Cover the container
+                      backgroundRepeat: 'no-repeat', // Prevent repeating the image
                     }}
+
+
                   >
-                    <Image
+                    {/* <Image
                       src="/images/alfred.jpg"
                       alt="Alfred"
                       layout="fill"
                       objectFit="cover"
-                    />
+                    /> */}
                   </Box>
                 )}
                 <FadeInText
