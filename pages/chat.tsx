@@ -12,7 +12,6 @@ import {
   Tooltip,
   useDisclosure,
 } from "@chakra-ui/react";
-import Image from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
 import { FaUser } from "react-icons/fa";
 

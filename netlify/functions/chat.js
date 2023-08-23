@@ -17,7 +17,7 @@ export const handler = async function (req, res) {
 
   let response = {};
 
-  const messages = [new HumanChatMessage(truncate(input, 3000) ?? "")];
+  const messages = [new HumanChatMessage(truncate(input, 2000) ?? "")];
   try {
     response = await chat.call(messages);
   } catch (error) {
