@@ -33,13 +33,14 @@ export default function Chat() {
   const [currentDocuments, setCurrentDocuments] = useState(null);
 
   const jobSpecString = getJobSpec(jobspec);
-  async function fetchDataWithRetry( n = 10) {
 
+  
+  async function fetchDataWithRetry(n = 10) {
     const appendHistory =
-    "\nIf necessary, utilize the below chat history as additional context:" +
-    JSON.stringify(messages);
+      "\nIf necessary, utilize the below chat history as additional context:" +
+      JSON.stringify(messages);
 
-  const url = "/api/chat";
+    const url = "/api/chat";
     const options = {
       method: "POST",
       headers: {
@@ -53,34 +54,80 @@ export default function Chat() {
       }),
     };
     try {
-      const response = await fetch(url, options,);
-  
-      if (!response.ok) { // or check for the status you're interested in like response.status !== 502
-        throw new Error('Network response was not ok');
+      const response = await fetch(url, options);
+      console.log(
+        "🚀 ~ file: chat.tsx:56 ~ fetchDataWithRetry ~ response:",
+        response
+      );
+
+      if (!response.ok) {
+        // or check for the status you're interested in like response.status !== 502
+        throw new Error("Network response was not ok");
       }
-  
+
       return await response.json();
-  
-    } catch(error) {
+    } catch (error) {
       if (n === 1) throw error;
-      console.log(`Retrying due to ${error.message}. Retries left: ${n-1}`);
-  
+      console.log(`Retrying due to ${error.message}. Retries left: ${n - 1}`);
+
       // Wait for 1 second before retrying to avoid immediate consecutive calls
-      await new Promise(resolve => setTimeout(resolve, 1000));
-  
-      return fetchDataWithRetry( n - 1);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      return fetchDataWithRetry(n - 1);
     }
   }
-  
-  async function handleUserInput(input) {
 
-   
+  const fetchData = async (url, body, n = 3) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    };
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) throw new Error('Network response was not ok');
+      return await response.json();
+    } catch (error) {
+      if (n === 1) throw error;
+      console.log(`Retrying due to ${error.message}. Retries left: ${n - 1}`);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      return fetchData(url, body, n - 1);
+    }
+  };
+  const fetchSimilaritySearch = (input) => {
+    return fetchData('/api/similaritySearch', { input });
+  };
+
+    const fetchChat = (input) => {
+    return fetchData('/api/chat', {
+      input
+    });
+  };
+
+  async function handleUserInput(input) {
+    // Call the similarity search endpoint first
+    const similaritySearchResponse = await fetchSimilaritySearch(input);
+
+    const semanticSearchContext = `These results are from a Samuel Morgans CV: "${similaritySearchResponse.context}"`;
+
+    // Construct the appendHistory string
+    const appendHistory =
+      '\nIf necessary, utilize the below chat history as additional context:' +
+      JSON.stringify(messages);
+
+    // Call the chat endpoint with the semanticSearchContext
+    const chatResponse = await fetchChat(
+      `promptSetup: "${getPromptInjection(jobSpecString, username)}"\n UserInput: ${input}\n context: ${semanticSearchContext} ${appendHistory}`,
   
-  
-    const data = await fetchDataWithRetry();
-    return data;
+    );
+
+    return {
+      result: chatResponse.result,
+      context: similaritySearchResponse.context,
+    };
   }
-  
 
   async function handleSubmit(e) {
     e.preventDefault();

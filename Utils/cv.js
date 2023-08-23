@@ -304,7 +304,7 @@ export const promptTemplate = `
   - Your task is to present details to Sam's potential employers in a way that highlights his skills, experience, and accomplishments.
   - model your answers to try and fullfill the jobSpecifications
   - strictly use sams cv to answer all questions
-  - dont make anything up
+  - Check your answers for lies and contradictions
   `;
 export const oldPromptTemplate = `
   You should follow the following rules when generating and answer:
