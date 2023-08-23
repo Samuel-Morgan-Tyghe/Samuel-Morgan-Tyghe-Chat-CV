@@ -297,9 +297,10 @@ export default function Chat() {
             </Flex>
           </form>
         </Flex>
-        <Link href="https://samuel-morgan-tyghe.github.io/3d-Desk-CV/dist/index.html" isExternal color="blue.500">
-          View My 3D Desk CV
-        </Link>
+        <Flex ml='auto' w='100%' justifyContent='flex-end'>
+          <Link ml='auto' href="https://samuel-morgan-tyghe.github.io/3d-Desk-CV/dist/index.html" isExternal color="blue.500">
+            View My 3D Desk CV
+          </Link></Flex>
       </Box>
       <ContextModal
         isOpen={isOpen}
