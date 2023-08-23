@@ -21,6 +21,7 @@ import { getPromptInjection } from "Utils/cv";
 import { getJobSpec } from "Utils/jobSpec";
 import { useRouter } from "next/router";
 import ContextModal from "./ContextModal";
+import DownloadCV from "@components/DownloadCV";
 
 export default function Chat() {
   const [input, setInput] = useState("");
@@ -34,7 +35,6 @@ export default function Chat() {
 
   const jobSpecString = getJobSpec(jobspec);
 
-  
   async function fetchDataWithRetry(n = 10) {
     const appendHistory =
       "\nIf necessary, utilize the below chat history as additional context:" +
@@ -79,15 +79,15 @@ export default function Chat() {
 
   const fetchData = async (url, body, n = 3) => {
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     };
     try {
       const response = await fetch(url, options);
-      if (!response.ok) throw new Error('Network response was not ok');
+      if (!response.ok) throw new Error("Network response was not ok");
       return await response.json();
     } catch (error) {
       if (n === 1) throw error;
@@ -97,12 +97,12 @@ export default function Chat() {
     }
   };
   const fetchSimilaritySearch = (input) => {
-    return fetchData('/api/similaritySearch', { input });
+    return fetchData("/api/similaritySearch", { input });
   };
 
-    const fetchChat = (input) => {
-    return fetchData('/api/chat', {
-      input
+  const fetchChat = (input) => {
+    return fetchData("/api/chat", {
+      input,
     });
   };
 
@@ -114,13 +114,15 @@ export default function Chat() {
 
     // Construct the appendHistory string
     const appendHistory =
-      '\nIf necessary, utilize the below chat history as additional context:' +
+      "\nIf necessary, utilize the below chat history as additional context:" +
       JSON.stringify(messages);
 
     // Call the chat endpoint with the semanticSearchContext
     const chatResponse = await fetchChat(
-      `promptSetup: "${getPromptInjection(jobSpecString, username)}"\n UserInput: ${input}\n context: ${semanticSearchContext} ${appendHistory}`,
-  
+      `promptSetup: "${getPromptInjection(
+        jobSpecString,
+        username
+      )}"\n UserInput: ${input}\n context: ${semanticSearchContext} ${appendHistory}`
     );
 
     return {
@@ -188,7 +190,7 @@ export default function Chat() {
               // Only change autoScroll state if it's currently true
               const isAtBottom =
                 chatContainerRef.current.scrollHeight -
-                  chatContainerRef.current.scrollTop <=
+                chatContainerRef.current.scrollTop <=
                 chatContainerRef.current.clientHeight + 10;
 
               if (!isAtBottom) {
@@ -286,14 +288,18 @@ export default function Chat() {
                 onChange={(e) => setInput(e.target.value)}
               />
             </FormControl>
-            <Button
-              isLoading={isLoading}
-              type="submit"
-              mt={4}
-              colorScheme="blue"
-            >
-              Send
-            </Button>
+            <Flex justifyContent='space-between' alignItems='center' mt={4}>
+              <Button
+                isLoading={isLoading}
+                type="submit"
+                colorScheme="blue"
+              >
+                Send
+              </Button>
+              <Button>
+                <DownloadCV />
+              </Button>
+            </Flex>
           </form>
         </Flex>
       </Box>
