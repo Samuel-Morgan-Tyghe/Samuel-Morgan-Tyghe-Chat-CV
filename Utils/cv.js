@@ -61,38 +61,10 @@ Languages
 React Typescript HTML CSS `;
 
 const condensedCV = `Samuel Morgan-Tyghe
-Web Developer, Newcastle & Edinburgh
-
-Professional Summary:
-A web developer with over 2 years of experience, skilled in Typescript-Chakra, Jamstack, React-Redux, various APIs, third-party integrations, and databases. Experienced in Photoshop, Figma, website design, and fine arts.
-
-Work History:
-
-hedgehog lab, Newcastle: Web & app development, security fixes, SEO, Accessibility.
-In-House: Bridged Graphic Design and Front-End Development, optimized components.
-Education:
-
-Bachelor's degree in Digital Arts from Bath Spa University.
-Projects:
-
-Various internal and membership websites utilizing Typescript, NextJS, React-query, Chakraui, Chart.js, Node, React-Select, and other technologies.
-Contact:
-
-Address: Edinburgh, EDH, 4AG
-Phone: 073-760-80332
-Email: samuelmorganvisual@gmail.com
-Skills:
-
-React (Functional + Class)
-CSS (Modules, Bootstrap, Tailwind)
-JS-IN-CSS (ChakraUI, MaterialUI, Styled Components)
-Webpack, Gulp
-Redux (Connect, Toolkit)
-TypeScript
-SEO, Security, Accessibility
-Jamstack (Hugo, Gatsby) + Contentful
-SQL, GraphQL
-Languages: React, Typescript, HTML, CSS`;
+Web Developer, 2+ years experience in Typescript-Chakra, Jamstack, React-Redux.
+Work: hedgehog lab (Web & app development); In-House (Graphic & Front-End Development).
+Skills: React, TypeScript, CSS, SEO, Redux, Jamstack.
+Contact: samuelmorganvisual@gmail.com, 073-760-80332`;
 
 export const AdditionalDetails = `
 Additional Details about Samuel Morgan-Tyghe: "

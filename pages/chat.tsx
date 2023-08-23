@@ -35,47 +35,6 @@ export default function Chat() {
 
   const jobSpecString = getJobSpec(jobspec);
 
-  async function fetchDataWithRetry(n = 10) {
-    const appendHistory =
-      "\nIf necessary, utilize the below chat history as additional context:" +
-      JSON.stringify(messages);
-
-    const url = "/api/chat";
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        input: input,
-        promptInjection: getPromptInjection(jobSpecString, username),
-        appendHistory: appendHistory,
-        retryNumber: n,
-      }),
-    };
-    try {
-      const response = await fetch(url, options);
-      console.log(
-        "🚀 ~ file: chat.tsx:56 ~ fetchDataWithRetry ~ response:",
-        response
-      );
-
-      if (!response.ok) {
-        // or check for the status you're interested in like response.status !== 502
-        throw new Error("Network response was not ok");
-      }
-
-      return await response.json();
-    } catch (error) {
-      if (n === 1) throw error;
-      console.log(`Retrying due to ${error.message}. Retries left: ${n - 1}`);
-
-      // Wait for 1 second before retrying to avoid immediate consecutive calls
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      return fetchDataWithRetry(n - 1);
-    }
-  }
   const fetchData = async (url, body, n = 3) => {
     const options = {
       method: "POST",
@@ -111,32 +70,40 @@ export default function Chat() {
     return fetchData("/api/chat", { input });
   };
 
-
   async function handleUserInput(input) {
-    // Call the similarity search endpoint first
-    const similaritySearchResponse = await fetchSimilaritySearch(input);
+    try {
+      // Call the similarity search endpoint first
+      const similaritySearchResponse = await fetchSimilaritySearch(input);
 
-    const semanticSearchContext = `These results are from a Samuel Morgans CV: "${similaritySearchResponse.context}"`;
+      const semanticSearchContext = `These results are from a Samuel Morgans CV: "${similaritySearchResponse.context}"`;
 
-    // Construct the appendHistory string
-    const appendHistory =
-      "\nIf necessary, utilize the below chat history as additional context:" +
-      JSON.stringify(messages);
+      // Construct the appendHistory string
+      const appendHistory =
+        "\nIf necessary, utilize the below chat history as additional context:" +
+        JSON.stringify(messages);
 
-    // Call the chat endpoint with the semanticSearchContext
-    const chatResponse = await fetchChat(
-      `promptSetup: "${getPromptInjection(
+      const combinedInput = `promptSetup: "${getPromptInjection(
         jobSpecString,
         username
       )}"\n UserInput: ${input}\n context: ${semanticSearchContext} ${appendHistory}`
-    );
+      // Call the chat endpoint with the semanticSearchContext
+      const chatResponse = await fetchChat(
+        `promptSetup: "${getPromptInjection(
+          jobSpecString,
+          username
+        )}"\n UserInput: ${input}\n context: ${semanticSearchContext} `
+      );
 
-    return {
-      result: chatResponse.result,
-      context: similaritySearchResponse.context,
-    };
+      return {
+        result: chatResponse.result,
+        context: similaritySearchResponse.context,
+      };
+    } catch (error) {
+      console.error("Error while fetching chat response:", error);
+      // Handle the error as you see fit, perhaps by displaying an error message to the user.
+      return null; // or an appropriate fallback value
+    }
   }
-
   async function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
@@ -144,25 +111,42 @@ export default function Chat() {
       role: user,
       content: input,
     };
-    const updatedMessages = [...messages, newMessage];
+    let updatedMessages = [...messages, newMessage];
     setMessages(updatedMessages);
 
     const response = await handleUserInput(input);
-    const newResponseMessage = {
-      role: "Alfred Pennyworth",
-      content: response?.result,
-      sourceDocuments: response?.context,
-    };
 
-    const updatedMessagesWithResponse = [
-      ...updatedMessages,
-      newResponseMessage,
-    ];
-    setMessages(updatedMessagesWithResponse);
+    if (response) {
+      const newResponseMessage = {
+        role: "Alfred Pennyworth",
+        content: response?.result,
+        sourceDocuments: response?.context,
+      };
+
+      updatedMessages = [
+        ...updatedMessages,
+        newResponseMessage,
+      ];
+      setMessages(updatedMessages); // Corrected this line
+    } else {
+      // Handle the failure here by adding an error message to the chat
+      const errorMessage = {
+        role: "System",
+        content: "Error with asking question. Please try again later.",
+      };
+
+      updatedMessages = [
+        ...updatedMessages,
+        errorMessage,
+      ];
+      setMessages(updatedMessages); // Corrected this line
+      console.error("Failed to fetch chat response.");
+    }
 
     setInput("");
     setIsLoading(false);
   }
+
 
   const chatContainerRef = useRef(null);
   const [autoScroll, setAutoScroll] = useState(true); // Add this state
