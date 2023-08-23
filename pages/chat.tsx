@@ -8,6 +8,7 @@ import {
   Heading,
   IconButton,
   Input,
+  Link,
   Tooltip,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -302,6 +303,9 @@ export default function Chat() {
             </Flex>
           </form>
         </Flex>
+        <Link href="https://samuel-morgan-tyghe.github.io/3d-Desk-CV/dist/index.html" isExternal color="blue.500">
+          View My 3D Desk CV
+        </Link>
       </Box>
       <ContextModal
         isOpen={isOpen}
