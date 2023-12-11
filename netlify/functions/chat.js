@@ -11,7 +11,7 @@ export const handler = async function (req, res) {
 
   const { input } = req?.body
     ? JSON.parse(req?.body)
-    : { input: `${math.random()} test` };
+    : { input: `${Math.random()} test` };
 
   function truncate(str, no_words) {
     return str.split(" ").splice(0, no_words).join(" ");
