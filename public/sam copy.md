@@ -3,10 +3,15 @@ Edinburgh, Scotland, United Kingdom
 samuelmorganvisual@gmail.com | 07376080332 | linkedin.com/in/samuel-morgan-tyghe
 
 **Summary**  
-Dynamic Web Developer with a reputation for robust problem-solving and leadership in key projects. In just over 2 years, have demonstrated a rapid learning curve, managing complete development cycles, and engaging strategically with clients. Proficient in a broad array of modern technologies, showing readiness for the next challenge in a senior role.
+Dynamic Web Developer with a reputation for robust problem-solving and leadership in key projects. In just over 2 years, have demonstrated a rapid learning curve, managing complete developmednt cycles, and engaging strategically with clients. Proficient in a broad array of modern technologies, showing readiness for the next challenge in a senior role.
 
 **Skills**  
 React, Redux, Typescript, Nodejs, GraphQL, SQL, Styled Components, Sass, Webpack, Three.js, PWA, HTML, CSS, JavaScript.
+
+**Proffessional products**
+- Easy to use React query utility wrapper https://www.npmjs.com/package/easy-query-hooks 
+- Easy ChakraUi utility animations https://www.npmjs.com/package/easy-chakra-animate
+- Animation wrapper for chakraui + framer motion https://643c599e10255e45ba42fdae-celzvjwdvb.chromatic.com/?path=/story/animations-onscroll--default
 
 **Career Highlights**  
 - Led project teams in developing and implementing critical business logic, saving weeks of time and enhancing product effectiveness.
