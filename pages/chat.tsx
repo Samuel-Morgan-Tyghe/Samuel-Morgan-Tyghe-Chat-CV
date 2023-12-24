@@ -22,6 +22,7 @@ import { getPromptInjection } from "Utils/cv";
 import { getJobSpec } from "Utils/jobSpec";
 import { useRouter } from "next/router";
 import ContextModal from "./ContextModal";
+import MarkdownPreview from "@components/MarkdownPreview";
 
 export default function Chat() {
   const [input, setInput] = useState("");
@@ -85,7 +86,7 @@ export default function Chat() {
       const combinedInput = `promptSetup: "${getPromptInjection(
         jobSpecString,
         username
-      )}"\n UserInput: ${input}\n context: ${semanticSearchContext} ${appendHistory}`
+      )}"\n UserInput: ${input}\n context: ${semanticSearchContext} ${appendHistory}`;
       // Call the chat endpoint with the semanticSearchContext
       const chatResponse = await fetchChat(
         `promptSetup: "${getPromptInjection(
@@ -123,10 +124,7 @@ export default function Chat() {
         sourceDocuments: response?.context,
       };
 
-      updatedMessages = [
-        ...updatedMessages,
-        newResponseMessage,
-      ];
+      updatedMessages = [...updatedMessages, newResponseMessage];
       setMessages(updatedMessages); // Corrected this line
     } else {
       // Handle the failure here by adding an error message to the chat
@@ -135,10 +133,7 @@ export default function Chat() {
         content: "Error with asking question. Please try again later.",
       };
 
-      updatedMessages = [
-        ...updatedMessages,
-        errorMessage,
-      ];
+      updatedMessages = [...updatedMessages, errorMessage];
       setMessages(updatedMessages); // Corrected this line
       console.error("Failed to fetch chat response.");
     }
@@ -146,7 +141,6 @@ export default function Chat() {
     setInput("");
     setIsLoading(false);
   }
-
 
   const chatContainerRef = useRef(null);
   const [autoScroll, setAutoScroll] = useState(true); // Add this state
@@ -180,7 +174,7 @@ export default function Chat() {
               // Only change autoScroll state if it's currently true
               const isAtBottom =
                 chatContainerRef.current.scrollHeight -
-                chatContainerRef.current.scrollTop <=
+                  chatContainerRef.current.scrollTop <=
                 chatContainerRef.current.clientHeight + 10;
 
               if (!isAtBottom) {
@@ -225,15 +219,13 @@ export default function Chat() {
                     position="relative"
                     rounded="4px"
                     sx={{
-                      '&>span': {
-                        borderRadius: '4px',
+                      "&>span": {
+                        borderRadius: "4px",
                       },
                       backgroundImage: `url("/images/alfred.jpg")`, // Set background image using CSS
-                      backgroundSize: 'cover', // Cover the container
-                      backgroundRepeat: 'no-repeat', // Prevent repeating the image
+                      backgroundSize: "cover", // Cover the container
+                      backgroundRepeat: "no-repeat", // Prevent repeating the image
                     }}
-
-
                   >
                     {/* <Image
                       src="/images/alfred.jpg"
@@ -283,12 +275,8 @@ export default function Chat() {
                 onChange={(e) => setInput(e.target.value)}
               />
             </FormControl>
-            <Flex justifyContent='space-between' alignItems='center' mt={4}>
-              <Button
-                isLoading={isLoading}
-                type="submit"
-                colorScheme="blue"
-              >
+            <Flex justifyContent="space-between" alignItems="center" mt={4}>
+              <Button isLoading={isLoading} type="submit" colorScheme="blue">
                 Send
               </Button>
               <Button>
@@ -297,10 +285,20 @@ export default function Chat() {
             </Flex>
           </form>
         </Flex>
-        <Flex ml='auto' w='100%' justifyContent='flex-end'>
-          <Link ml='auto' href="https://samuel-morgan-tyghe.github.io/3d-Desk-CV/dist/index.html" isExternal color="blue.500">
-            View My 3D Desk CV
-          </Link></Flex>
+        <Flex ml="auto" w="100%" justifyContent="space-between">
+          <MarkdownPreview filePath="/Samuel_Morgan-Tyghe_CV.md" />
+
+          <Button>
+            <Link
+              ml="auto"
+              href="https://samuel-morgan-tyghe.github.io/3d-Desk-CV/dist/index.html"
+              isExternal
+              color="blue.500"
+            >
+              View My 3D Desk CV
+            </Link>
+          </Button>
+        </Flex>
       </Box>
       <ContextModal
         isOpen={isOpen}
