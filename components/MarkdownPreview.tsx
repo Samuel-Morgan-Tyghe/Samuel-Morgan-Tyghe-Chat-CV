@@ -9,6 +9,7 @@ import {
   ModalBody,
   Button,
   useDisclosure,
+  Box,
 } from "@chakra-ui/react";
 
 interface MarkdownPreviewProps {
@@ -31,11 +32,6 @@ const MarkdownPreview: React.FC<MarkdownPreviewProps> = ({ filePath }) => {
     setHtmlContent(marked(markdownText));
   }, [markdownText]);
 
-  const markdownStyle = {
-    whiteSpace: "pre-wrap",
-    wordBreak: "break-word",
-  };
-
   return (
     <>
       <Button onClick={onOpen}>Preview CV</Button>
@@ -46,9 +42,10 @@ const MarkdownPreview: React.FC<MarkdownPreviewProps> = ({ filePath }) => {
           <ModalHeader>CV Preview</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <div
+            <Box
+              whiteSpace={"pre-wrap"}
+              wordBreak={"break-word"}
               dangerouslySetInnerHTML={{ __html: htmlContent }}
-              style={markdownStyle}
             />
           </ModalBody>
         </ModalContent>
