@@ -1,12 +1,14 @@
 **Samuel Morgan-Tyghe**  
-Edinburgh, Scotland, United Kingdom  
-[LinkedIn Profile](linkedin.com/in/samuel-morgan-tyghe)
+Bath - Edinburgh, United Kingdom  
+[LinkedIn Profile](https://www.linkedin.com/in/samuel-morgan-tyghe),
+[CV Chatbot](https://www.chat-cv.com),
+[3D CV](https://samuel-morgan-tyghe.github.io/3d-Desk-CV/dist/index.html)
 
 **Summary**  
 Dynamic Web Developer with over 4 years of experience in robust problem-solving, leadership in key projects, and a track record of managing complete development cycles and strategic client engagement. Proficient in a wide range of modern web technologies and ready for the next challenge.
 
-**Skills**  
-React, Redux, TypeScript, Node.js, GraphQL, SQL, Styled Components, Sass, Webpack, Three.js, PWA, HTML, CSS, JavaScript.
+**Technical Skills**  
+React, Redux, TypeScript, ChakraUi, Vite, NextJs, Contentful, ChartJs, Webpack, Three.js, PWA, NodeJs, HTML, CSS, JavaScript.
 
 **Professional Products**
 - Easy to use React query utility wrapper: A tool simplifying React Query for better developer experience. [View on npm](https://www.npmjs.com/package/easy-query-hooks)
@@ -15,23 +17,12 @@ React, Redux, TypeScript, Node.js, GraphQL, SQL, Styled Components, Sass, Webpac
 **Career Highlights**  
 - Secured £600k in funding for a year-long project from the Internet Security Forum.
 - Secured £290k funding for the development of the Caroline Girvan web app.
+- Saved Coty £3.6k Per Year by proposing and facilitating an automative solution to what was an expensive service.
 - Converted multiple clients into long-term partners, including ISF, CG, and CMSPI.
 - Implemented innovative UI solutions, such as a widget-based data entry approach for ISF SupplyChain.
 - Led teams in developing critical business logic, significantly reducing development time and enhancing product effectiveness for clients like Caroline Girvan and Cynergy Bank.
-- Developed easy-to-use React query wrappers and utility animation wrappers using framer motion - chakraui.
-- Facilitated discussions on implementing breakpoints and templates for ratios to streamline development.
+- Developed easy-to-use xReact query wrappers and utility animation wrappers using framer motion - chakraui.
 - Enhanced website loading speed by 10 seconds for Coty, improving user experience.
-- Halved site load speed for CMSPI, ensuring smooth performance for a critical product release.
-- Built the Caroline Girvan web app from scratch, leading to further client engagement.
-- Developed a brochure site for Cynergy Bank with perfect lighthouse scores, meeting AA standards.
-- Successfully hosted a demo for 30 clients, maintaining composure under pressure.
-- Delivered innovative technical solutions for Cynergy Bank, winning client trust post-legal complications with another agency.
-- Completed a complex brochure website for Cynergy Bank within a 2-month period.
-- Designed multiple complex custom UIs for clients like ISF and Caroline Girvan, including:
-  - ISF Dashboard Dynamic Table (caching queries, CSV export, search, sort, filter, custom UI in cells, scrollable, expandable columns)
-  - ISF Widget UI (23 complex form inputs, animations on enter and for data updates)
-  - Caroline Girvan Social Media (comment reply threads profile)
-- Rapidly developed 80% of the Caroline Girvan web app in 3 weeks, securing significant funding.
 
 **Experience**  
 **Web Engineer, Atom Bank, Dec 2023 - Present**  
@@ -55,7 +46,7 @@ React, Redux, TypeScript, Node.js, GraphQL, SQL, Styled Components, Sass, Webpac
 - Innovated in the creation of utility tools and spearheaded key discussions with design teams, contributing to improved workflows and development practices.
 
 *Projects (Hedgehog Lab)*  
-- [Cynergy Bank](https://cmspi.com/): NextJs, Contentful, TypeScript, Node, React-query, Tanstack, Chakraui.
+- [Cynergy Bank](https://www.cynergybank.co.uk/): NextJs, Contentful, TypeScript, Node, React-query, Tanstack, Chakraui.
 - [ISF SupplyChain](https://www.securityforum.org/services/supply-chain-management-assessment/): TypeScript, React-Query, ChakraUi, Framer, Widget UI, Dynamic Tables.
 - [Stocknet Institute](https://stocknetinstitute.com/): NextJs, TypeScript, Node, React-query, Tanstack, Chart.js, React-Select.
 - [Caroline Girvan Web App](https://cgxapp.com/): Vite, TypeScript, React-query, Chakraui, React-Multi-date-picker.
@@ -80,3 +71,17 @@ React, Redux, TypeScript, Node.js, GraphQL, SQL, Styled Components, Sass, Webpac
 
 **Education**  
 Bath Spa University, Bachelor's degree, Digital Arts, 2012 - 2015
+
+**Career Highlights Continued**  
+- Halved site load speed for CMSPI, ensuring smooth performance for a critical product release.
+- Developed a brochure site for Cynergy Bank with perfect lighthouse scores, meeting AA standards.
+- Successfully hosted a demo for 30 clients, maintaining composure under pressure.
+- Delivered innovative technical solutions for Cynergy Bank, winning client trust post-legal complications with another agency.
+- Completed a complex brochure website for Cynergy Bank within a 2-month period.
+- Collaborated in the design process and implemented multiple complex custom UIs for clients like ISF and Caroline Girvan, including:
+  - ISF Dashboard Dynamic Table (caching queries, CSV export, search, sort, filter, custom UI in cells, scrollable, expandable columns)
+  - ISF Widget UI (23 complex form inputs, animations on enter and for data updates)
+  - Caroline Girvan Social Media (comment reply threads profile)
+- Rapidly developed 80% of the Caroline Girvan web app in 3 weeks, securing significant funding.
+- Proudly contributed to a junior developer's development, mentoring them throughout their year-long journey to mid-level status.
+- Facilitated discussions between Developers and Designers on implementing breakpoints and templates for ratios to streamline development.
