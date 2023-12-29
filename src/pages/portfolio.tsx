@@ -31,7 +31,7 @@ function Portfolio() {
       overlap: false,
       totalWidth: 1000,
       totalHeight: 562.5,
-      videoUrl: "/video_example.mp4",
+      videoUrl: "/video_example2.webm",
     },
     {
       rows: 3,
@@ -40,7 +40,7 @@ function Portfolio() {
       overlap: false,
       totalWidth: 562.5,
       totalHeight: 562.5,
-      videoUrl: "/video_example.mp4",
+      videoUrl: "/video_example2.webm",
     },
     {
       rows: 3,
@@ -49,7 +49,7 @@ function Portfolio() {
       overlap: false,
       totalWidth: 1000,
       totalHeight: 562.5,
-      videoUrl: "/video_example.mp4",
+      videoUrl: "/video_example2.webm",
     },
     {
       rows: 3,
@@ -58,7 +58,7 @@ function Portfolio() {
       overlap: false,
       totalWidth: 1000,
       totalHeight: 562.5,
-      videoUrl: "/video_example.mp4",
+      videoUrl: "/video_example2.webm",
     },
     {
       rows: 3,
@@ -67,7 +67,7 @@ function Portfolio() {
       overlap: false,
       totalWidth: 1000,
       totalHeight: 562.5,
-      videoUrl: "/video_example.mp4",
+      videoUrl: "/video_example2.webm",
     },
     {
       rows: 3,
@@ -76,7 +76,7 @@ function Portfolio() {
       overlap: false,
       totalWidth: 1000,
       totalHeight: 562.5,
-      videoUrl: "/video_example.mp4",
+      videoUrl: "/video_example2.webm",
     },
     {
       rows: 3,
@@ -85,7 +85,7 @@ function Portfolio() {
       overlap: false,
       totalWidth: 1000,
       totalHeight: 562.5,
-      videoUrl: "/video_example.mp4",
+      videoUrl: "/video_example2.webm",
     },
     {
       rows: 3,
@@ -94,7 +94,7 @@ function Portfolio() {
       overlap: false,
       totalWidth: 1000,
       totalHeight: 562.5,
-      videoUrl: "/video_example.mp4",
+      videoUrl: "/video_example2.webm",
     },
   ];
 
@@ -102,10 +102,17 @@ function Portfolio() {
     <Layout>
       <Button onClick={() => setActiveSection(1)}>active 1</Button>
       <Button onClick={() => setActiveSection(0)}>active 0</Button>
-      <PuzzleWelcome
-        {...sectionConfigs[activeSection]}
-        activeSection={activeSection}
-      />
+      <Center
+        w={activeSection === 1 ? "50vw" : "100vw"}
+        h="100vh"
+        position={"absolute"}
+        right={0}
+      >
+        <PuzzleWelcome
+          {...sectionConfigs[activeSection]}
+          activeSection={activeSection}
+        />
+      </Center>
 
       {sectionComponents.map((_, index) => (
         <Container fluid={true} key={index}>

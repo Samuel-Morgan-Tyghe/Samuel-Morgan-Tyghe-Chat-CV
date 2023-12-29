@@ -19,7 +19,7 @@ const PuzzleWelcome = ({
   cols = 2,
   totalWidth = 1000,
   totalHeight = 562.5,
-  videoUrl = "/video_example.mp4",
+  videoUrl = "/video_example2.webm",
   activeSection,
   pieceShapes,
   overlap = false,
@@ -81,39 +81,35 @@ const PuzzleWelcome = ({
   }, [activeSection]);
 
   return (
-    <Center w="100vw" h="100vh" position={"absolute"}>
-      <SimpleGrid columns={2}>
-        <Box
-          position={"relative"}
-          // overflow={"hidden"}
-          width={totalWidth}
-          height={totalHeight}
-        >
-          {puzzlePieces.map((piece, index) => (
-            <PuzzlePiece
-              key={index}
-              videoUrl={videoUrl}
-              initialPosition={piece.initialPosition}
-              correctPosition={piece.correctPosition}
-              videoPosition={piece.videoPosition}
-              width={piece.width}
-              height={piece.height}
-              delay={piece.delay}
-              totalWidth={totalWidth}
-              totalHeight={totalHeight}
-              activeSection={activeSection}
-              overlap={overlap}
-              // pieceShape={
-              //   pieceShapes[
-              //     Math.round(Math.random() * pieceShapes.length) %
-              //       pieceShapes.length
-              //   ]
-              // }
-            />
-          ))}
-        </Box>
-      </SimpleGrid>
-    </Center>
+    <Box
+      position={"relative"}
+      // overflow={"hidden"}
+      width={totalWidth}
+      height={totalHeight}
+    >
+      {puzzlePieces.map((piece, index) => (
+        <PuzzlePiece
+          key={index}
+          videoUrl={videoUrl}
+          initialPosition={piece.initialPosition}
+          correctPosition={piece.correctPosition}
+          videoPosition={piece.videoPosition}
+          width={piece.width}
+          height={piece.height}
+          delay={piece.delay}
+          totalWidth={totalWidth}
+          totalHeight={totalHeight}
+          activeSection={activeSection}
+          overlap={overlap}
+          // pieceShape={
+          //   pieceShapes[
+          //     Math.round(Math.random() * pieceShapes.length) %
+          //       pieceShapes.length
+          //   ]
+          // }
+        />
+      ))}
+    </Box>
   );
 };
 
