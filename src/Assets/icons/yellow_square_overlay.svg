@@ -1,0 +1,44 @@
+<svg width="721" height="528" viewBox="0 0 721 528" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_684_6448)">
+<rect opacity="0.6" x="103" y="106" width="103" height="106" transform="rotate(-180 103 106)" fill="#F7F014"/>
+<g style="mix-blend-mode:multiply" opacity="0.6">
+<rect x="103" y="317" width="103" height="106" transform="rotate(-180 103 317)" fill="#F7F014"/>
+</g>
+<rect opacity="0.8" x="103" y="528" width="103" height="106" transform="rotate(-180 103 528)" fill="#F7F014"/>
+<rect opacity="0.6" x="206" y="422" width="103" height="105" transform="rotate(-180 206 422)" fill="#F7F014"/>
+<g style="mix-blend-mode:multiply" opacity="0.8">
+<rect x="206" y="528" width="103" height="106" transform="rotate(-180 206 528)" fill="#F7F014"/>
+</g>
+<g style="mix-blend-mode:multiply" opacity="0.8">
+<rect x="309" y="422" width="103" height="105" transform="rotate(-180 309 422)" fill="#F7F014"/>
+</g>
+<rect x="309" y="528" width="103" height="106" transform="rotate(-180 309 528)" fill="#F7F014"/>
+<rect opacity="0.9" x="412" y="528" width="103" height="106" transform="rotate(-180 412 528)" fill="#F7F014"/>
+<g style="mix-blend-mode:multiply" opacity="0.8">
+<rect x="515" y="422" width="103" height="105" transform="rotate(-180 515 422)" fill="#F7F014"/>
+</g>
+<rect opacity="0.6" x="515" y="528" width="103" height="106" transform="rotate(-180 515 528)" fill="#F7F014"/>
+<g style="mix-blend-mode:multiply" opacity="0.6">
+<rect x="618" y="106" width="103" height="106" transform="rotate(-180 618 106)" fill="#F7F014"/>
+</g>
+<rect opacity="0.4" x="618" y="528" width="103" height="106" transform="rotate(-180 618 528)" fill="#F7F014"/>
+<g style="mix-blend-mode:multiply">
+<rect x="721" y="106" width="103" height="106" transform="rotate(-180 721 106)" fill="#003D4C"/>
+</g>
+<rect x="721" y="211" width="103" height="105" transform="rotate(-180 721 211)" fill="#F7F014"/>
+<g style="mix-blend-mode:multiply" opacity="0.6">
+<rect x="721" y="317" width="103" height="106" transform="rotate(-180 721 317)" fill="#F7F014"/>
+</g>
+<g style="mix-blend-mode:multiply" opacity="0.9">
+<rect x="721" y="422" width="103" height="105" transform="rotate(-180 721 422)" fill="#003D4C"/>
+</g>
+<g style="mix-blend-mode:multiply">
+<rect x="721" y="528" width="103" height="106" transform="rotate(-180 721 528)" fill="#F7F014"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_684_6448">
+<rect width="721" height="528" fill="white"/>
+</clipPath>
+</defs>
+</svg>

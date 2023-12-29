@@ -2,8 +2,10 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@components/*": ["components/*"],
-      "@styles/*": ["styles/*"]
+      "@components/*": ["src/components/*"],
+      "@styles/*": ["styles/*"],   
+      "~/*": ["src/*"],
+      "@/*": ["*"]
     },
 
     "target": "es5",
@@ -21,6 +23,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "Utils/cv.js", "chunkedData.js", "Utils/Animate.jsx", "netlify/functions/similaritySearch.mjs"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/Utils/cv.js", "chunkedData.js", "src/Utils/Animate.jsx", "netlify/functions/similaritySearch.mjs"],
   "exclude": ["node_modules"]
 }
