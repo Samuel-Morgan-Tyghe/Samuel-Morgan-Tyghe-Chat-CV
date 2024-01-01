@@ -31,6 +31,14 @@ p {
   white-space: pre-line;
 }
 
+circle,
+rect,
+line {
+  stroke-width: 10px;
+  stroke-linecap: round;
+  fill: transparent;
+}
+
 .spinner {
   width: 55px;
   height: 55px;
