@@ -1,9 +1,18 @@
-import { BoxProps, Center, CenterProps, Image, Text } from "@chakra-ui/react";
+import {
+  BoxProps,
+  Center,
+  CenterProps,
+  Flex,
+  Image,
+  Text,
+} from "@chakra-ui/react";
+import Container from "@components/grid/Container/Container";
 import Screen from "@components/portfolio/ScrollingScreen/Screen";
 import { scrollRanges } from "@components/portfolio/ScrollingScreen/scrollUtil";
 import { useScroll } from "framer-motion";
 import { ReactNode, cloneElement, useEffect, useState } from "react";
 import Layout from "src/components/Layout";
+import { usePageNumber } from "~/context/scrollContext";
 
 const Section = ({
   children,
@@ -64,7 +73,7 @@ const randomColors = [
 ];
 
 function Portfolio() {
-  const [pageNumber, setPageNumber] = useState(0);
+  const { pageNumber, setPageNumber } = usePageNumber();
 
   const [activeSection, setActiveSection] = useState(0);
 
@@ -114,16 +123,24 @@ function Portfolio() {
           {...sectionConfigs[activeSection]}
           activeSection={activeSection}
         />
+
       </Center> */}
-      <Center w="100vw" h="100vh" boxShadow={"dark-lg"}>
-        <Screen
-          setPageNumber={setPageNumber}
-          pageNumber={pageNumber}
-          activeSection={activeSection}
-          totalPageScrollLength={totalPageScrollLength}
-          currentPageScrollLength={currentPageScrollLength}
-        />
-      </Center>
+      <Container>
+        <Flex
+          // w="100vw"
+          h="100vh"
+          justifyContent="flex-end"
+          alignItems="center"
+        >
+          <Screen
+            setPageNumber={setPageNumber}
+            pageNumber={pageNumber}
+            activeSection={activeSection}
+            totalPageScrollLength={totalPageScrollLength}
+            currentPageScrollLength={currentPageScrollLength}
+          />
+        </Flex>
+      </Container>
       {pageComponents.map((sections, pageIndex) =>
         sections.map(
           (Sect, index) => (

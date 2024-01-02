@@ -1,7 +1,7 @@
 import { type ComponentStyleConfig } from "@chakra-ui/react";
 import { merge } from "lodash";
 
-import { pxToRem } from "../../Utils/pxToRem";
+import { pxToRem } from "../../../src/Utils/pxToRem";
 import { FormLabel } from "./FormLabel";
 
 const controlOuterStyles: ComponentStyleConfig["baseStyle"] = {

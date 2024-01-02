@@ -1,6 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 
-import { pxToRem } from "../Utils/pxToRem";
+import { pxToRem } from "../../src/Utils/pxToRem";
 import { breakpoints } from "./breakpoints";
 import { colours } from "./colors";
 import { Accordion } from "./components/Accordion";

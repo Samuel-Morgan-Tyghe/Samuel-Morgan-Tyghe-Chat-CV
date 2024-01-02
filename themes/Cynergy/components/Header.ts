@@ -1,7 +1,7 @@
 import { type ComponentStyleConfig } from "@chakra-ui/react";
 
-import { pxToEm } from "../../Utils/pxToEm";
-import { pxToRem } from "../../Utils/pxToRem";
+import { pxToEm } from "../../../src/Utils/pxToEm";
+import { pxToRem } from "../../../src/Utils/pxToRem";
 
 export const Heading: ComponentStyleConfig = {
   baseStyle: {

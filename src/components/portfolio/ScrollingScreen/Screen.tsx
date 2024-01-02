@@ -8,8 +8,11 @@ import {
 } from "@chakra-ui/react";
 import { useScroll, useSpring } from "framer-motion";
 import { ReactNode, useEffect, useRef, useState } from "react";
+import { Tilt } from "react-tilt";
 import DrawCircle from "./DrawCircle";
 import { Lefty, Refresh, Righty } from "./Icons";
+import Tilty from "react-tilty";
+
 const Screen = ({
   children,
   pageNumber,
@@ -94,75 +97,81 @@ const Screen = ({
     }
   };
   return (
-    <Flex
-      overflow={"hidden"}
-      rounded="14px"
-      direction={"column"}
-      w={"720px"}
-      h="640px"
-      position="fixed"
-    >
-      <Flex
-        roundedTop="14px"
-        border={"1px solid"}
-        borderBottom={"none"}
-        direction={"column"}
-        p="16px"
-        gap="16px"
-        position="relative"
-      >
-        <Box filter={"blur(4px)"} position={"absolute"} w="100%" h="100%" />
-        <Flex>
-          <DrawCircle />
-          <DrawCircle />
-          <DrawCircle />
+    <Box position="fixed">
+      <Tilty>
+        <Flex
+          overflow={"hidden"}
+          rounded="14px"
+          direction={"column"}
+          w={"720px"}
+          h="640px"
+          transform="perspective(800px) rotateY(-10deg)" // Apply 3D rotation
+          transformOrigin="right center" // Set the origin of transformation to the right center
+          boxShadow={"dark-lg"}
+        >
+          <Flex
+            roundedTop="14px"
+            border={"1px solid"}
+            borderBottom={"none"}
+            direction={"column"}
+            p="16px"
+            gap="16px"
+            position="relative"
+          >
+            <Box filter={"blur(4px)"} position={"absolute"} w="100%" h="100%" />
+            <Flex>
+              <DrawCircle />
+              <DrawCircle />
+              <DrawCircle />
+            </Flex>
+            <Flex w="100%" gap="4px">
+              <IconButton
+                variant={"ghost"}
+                icon={<Lefty />}
+                boxSize={"16px"}
+                aria-label={""}
+                onClick={decreasePage}
+              />
+
+              <IconButton
+                variant={"ghost"}
+                icon={<Righty />}
+                boxSize={"16px"}
+                aria-label={""}
+                onClick={increasePage}
+              />
+              <IconButton
+                variant={"ghost"}
+                icon={<Refresh />}
+                boxSize={"16px"}
+                aria-label={""}
+                onClick={handleRefresh}
+              />
+
+              <Box border={"1px solid"} h="16px" w={"100%"} rounded="full" />
+            </Flex>
+          </Flex>
+
+          <Box
+            overflow="scroll"
+            roundedBottom="14px"
+            border={"1px solid"}
+            h="640px"
+            ref={targetRef}
+          >
+            {isLoading ? (
+              <Center w={"100%"} h={"640px"}>
+                <Spinner size="xl" />
+              </Center>
+            ) : (
+              <Image
+                src={`/Assets/images/Portfolio/Screens-portfolio/${pageNumber}.png`}
+              />
+            )}
+          </Box>
         </Flex>
-        <Flex w="100%" gap="4px">
-          <IconButton
-            variant={"ghost"}
-            icon={<Lefty />}
-            boxSize={"16px"}
-            aria-label={""}
-            onClick={decreasePage}
-          />
-
-          <IconButton
-            variant={"ghost"}
-            icon={<Righty />}
-            boxSize={"16px"}
-            aria-label={""}
-            onClick={increasePage}
-          />
-          <IconButton
-            variant={"ghost"}
-            icon={<Refresh />}
-            boxSize={"16px"}
-            aria-label={""}
-            onClick={handleRefresh}
-          />
-
-          <Box border={"1px solid"} h="16px" w={"100%"} rounded="full" />
-        </Flex>
-      </Flex>
-
-      <Box
-        overflow="scroll"
-        roundedBottom="14px"
-        border={"1px solid"}
-        h="640px"
-        ref={targetRef}
-      >
-        {isLoading ? (
-          <Center w={"100%"} h={"640px"}>
-            <Spinner size="xl" />
-          </Center>
-        ) : (
-          <Image
-            src={`/Assets/images/Portfolio/Screens-portfolio/${pageNumber}.png`}
-          />
-        )}
-      </Box>
-    </Flex>
+      </Tilty>
+    </Box>
   );
 };
 

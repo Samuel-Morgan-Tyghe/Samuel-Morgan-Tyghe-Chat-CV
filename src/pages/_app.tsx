@@ -1,13 +1,17 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import MetaData from "@components/MetaData";
 import "../styles/globals.css";
+import { PageNumberProvider } from "~/context/scrollContext";
+import ChakrauiLayout from "~/containers/chakrauiLayout";
 
 function Application({ Component, pageProps }) {
   return (
-    <ChakraProvider>
-      <MetaData />
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <PageNumberProvider>
+      <ChakrauiLayout>
+        <MetaData />
+        <Component {...pageProps} />
+      </ChakrauiLayout>
+    </PageNumberProvider>
   );
 }
 

@@ -1,6 +1,6 @@
 import { type ComponentStyleConfig } from "@chakra-ui/react";
 
-import { pxToRem } from "../../Utils/pxToRem";
+import { pxToRem } from "../../../src/Utils/pxToRem";
 
 const navStyles = {
   container: {

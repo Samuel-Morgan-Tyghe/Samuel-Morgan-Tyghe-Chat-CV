@@ -1,6 +1,6 @@
 import { ComponentStyleConfig } from "@chakra-ui/react";
 
-import { pxToRem } from "../Utils/pxToRem";
+import { pxToRem } from "../../src/Utils/pxToRem";
 
 export const inputs: ComponentStyleConfig = {
   baseStyle: {
