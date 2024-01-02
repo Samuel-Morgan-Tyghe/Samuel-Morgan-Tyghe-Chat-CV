@@ -12,6 +12,7 @@ import Tilty from "react-tilty";
 import { usePageNumber } from "~/context/scrollContext";
 import DrawCircle from "./DrawCircle";
 import { Lefty, Refresh, Righty } from "./Icons";
+import { THEME_NAMES } from "../PageThemes";
 
 const Screen = ({ children }: { children?: ReactNode }) => {
   const {
@@ -93,13 +94,14 @@ const Screen = ({ children }: { children?: ReactNode }) => {
   };
   return (
     <Box position="fixed" zIndex={1}>
-      <Tilty>
+      <Tilty reverse={true} max={25}>
         <Flex
           overflow={"hidden"}
           rounded="14px"
           direction={"column"}
           w={"720px"}
-          h="640px"
+          maxH="640px"
+          h="min-content"
           transform="perspective(800px) rotateY(-10deg)" // Apply 3D rotation
           transformOrigin="right center" // Set the origin of transformation to the right center
           boxShadow={"dark-lg"}
@@ -159,16 +161,15 @@ const Screen = ({ children }: { children?: ReactNode }) => {
             overflow="scroll"
             roundedBottom="14px"
             border={"1px solid"}
-            h="640px"
+            // h=""
             ref={targetRef}
           >
             {isLoading ? (
-              <Center w={"100%"} h={"640px"}>
-                <Spinner size="xl" />
-              </Center>
+              <Spin />
             ) : (
               <Image
-                src={`/Assets/images/Portfolio/Screens-portfolio/${pageNumber}.png`}
+                src={`/Assets/images/Portfolio/Screens-portfolio/${THEME_NAMES[pageNumber]}.png`}
+                fallback={<Spin />}
               />
             )}
           </Box>
@@ -177,5 +178,11 @@ const Screen = ({ children }: { children?: ReactNode }) => {
     </Box>
   );
 };
+
+const Spin = () => (
+  <Center w={"100%"} h={"640px"}>
+    <Spinner size="xl" />
+  </Center>
+);
 
 export default Screen;
