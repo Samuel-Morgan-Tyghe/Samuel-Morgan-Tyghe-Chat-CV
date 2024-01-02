@@ -1,28 +1,65 @@
-import React, {
-  createContext,
-  useState,
-  useContext,
-  SetStateAction,
-} from "react";
+import { scrollRanges } from "@components/portfolio/ScrollingScreen/scrollUtil";
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { pageComponents } from "~/pages/portfolio";
 
-// Create a Context
 const PageNumberContext = createContext({
   pageNumber: 0,
-  setPageNumber: (value: SetStateAction<number>) => {},
+  setPageNumber: (value: number) => {},
+  activeSection: 0,
+  setActiveSection: (value: number) => {},
+  totalPageScrollLength: 0,
+  currentPageScrollLength: 0,
 });
 
-// Provider component that wraps your app and makes the pageNumber state available to any child component that calls `usePageNumber()`.
 export const PageNumberProvider = ({ children }) => {
   const [pageNumber, setPageNumber] = useState(0);
+  const [activeSection, setActiveSection] = useState(0);
+
+  const totalPageScrollLength = pageComponents.reduce(
+    (acc, sections) => acc + sections.length,
+    0
+  );
+
+  const currentPageScrollLength =
+    pageNumber < pageComponents.length ? pageComponents[pageNumber].length : 0;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const verticalScrollPosition = window?.scrollY ?? 0;
+      const viewportHeight = window?.innerHeight ?? 0;
+      setActiveSection(Math.floor(verticalScrollPosition / viewportHeight));
+
+      const scrollPosition = verticalScrollPosition / viewportHeight;
+      const currentPage = scrollRanges.findIndex(
+        ({ rangeStart, rangeEnd }) =>
+          scrollPosition >= rangeStart && scrollPosition < rangeEnd
+      );
+
+      if (currentPage !== -1) {
+        setPageNumber(currentPage);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [pageNumber]);
 
   return (
-    <PageNumberContext.Provider value={{ pageNumber, setPageNumber }}>
+    <PageNumberContext.Provider
+      value={{
+        pageNumber,
+        setPageNumber,
+        activeSection,
+        setActiveSection,
+        totalPageScrollLength,
+        currentPageScrollLength,
+      }}
+    >
       {children}
     </PageNumberContext.Provider>
   );
 };
 
-// Hook that enables any component to subscribe to pageNumber state
 export const usePageNumber = () => {
   const context = useContext(PageNumberContext);
   if (!context) {

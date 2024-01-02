@@ -1,4 +1,4 @@
-import { As, Box } from "@chakra-ui/react";
+import { As, Box, BoxProps } from "@chakra-ui/react";
 import { type Booleanish } from "@chakra-ui/utils";
 import { type ReactNode } from "react";
 import { classNames } from "~/Utils/helpers";
@@ -16,12 +16,14 @@ export const containerGutter = "16px";
 
 const containerMaxWidthFluid = "100%";
 
-export default function Container(props: {
-  children?: ReactNode;
-  fluid?: Booleanish;
-  className?: string;
-  as?: As;
-}) {
+export default function Container(
+  props: {
+    children?: ReactNode;
+    fluid?: Booleanish;
+    className?: string;
+    as?: As;
+  } & BoxProps
+) {
   const { fluid, children, ...passThroughProps } = props;
 
   return (

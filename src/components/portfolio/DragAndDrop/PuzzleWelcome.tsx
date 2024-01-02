@@ -25,9 +25,7 @@ const PuzzleWelcome = ({
   overlap = false,
 }: PuzzleWelcomeProps) => {
   const puzzleWidth = totalWidth / cols;
-  console.log("🚀 ~ file: PuzzleWelcome.tsx:28 ~ totalWidth:", totalWidth);
-  console.log("🚀 ~ file: PuzzleWelcome.tsx:28 ~ cols:", cols);
-  console.log("🚀 ~ file: PuzzleWelcome.tsx:28 ~ puzzleWidth:", puzzleWidth);
+
   const puzzleHeight = totalHeight / rows;
   const [puzzlePieces, setPuzzlePieces] = useState<PieceType[]>([]);
 

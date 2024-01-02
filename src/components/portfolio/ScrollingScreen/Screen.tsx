@@ -8,26 +8,21 @@ import {
 } from "@chakra-ui/react";
 import { useScroll, useSpring } from "framer-motion";
 import { ReactNode, useEffect, useRef, useState } from "react";
-import { Tilt } from "react-tilt";
+import Tilty from "react-tilty";
+import { usePageNumber } from "~/context/scrollContext";
 import DrawCircle from "./DrawCircle";
 import { Lefty, Refresh, Righty } from "./Icons";
-import Tilty from "react-tilty";
 
-const Screen = ({
-  children,
-  pageNumber,
-  setPageNumber,
-  activeSection,
-  totalPageScrollLength,
-  currentPageScrollLength,
-}: {
-  children?: ReactNode;
-  pageNumber: number;
-  setPageNumber: (number) => void;
-  activeSection: number;
-  totalPageScrollLength: number;
-  currentPageScrollLength: number;
-}) => {
+const Screen = ({ children }: { children?: ReactNode }) => {
+  const {
+    pageNumber,
+    setPageNumber,
+    activeSection,
+    setActiveSection,
+    totalPageScrollLength,
+    currentPageScrollLength,
+  } = usePageNumber();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const { scrollYProgress } = useScroll();
@@ -97,7 +92,7 @@ const Screen = ({
     }
   };
   return (
-    <Box position="fixed">
+    <Box position="fixed" zIndex={1}>
       <Tilty>
         <Flex
           overflow={"hidden"}
@@ -119,7 +114,15 @@ const Screen = ({
             position="relative"
           >
             <Box filter={"blur(4px)"} position={"absolute"} w="100%" h="100%" />
-            <Flex>
+            <Flex
+              sx={{
+                "circle, square, line": {
+                  strokeWidth: "10px",
+                  strokeLinecap: "round",
+                  fill: "transparent",
+                },
+              }}
+            >
               <DrawCircle />
               <DrawCircle />
               <DrawCircle />

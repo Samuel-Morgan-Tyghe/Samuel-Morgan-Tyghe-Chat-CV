@@ -23,6 +23,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/Utils/cv.js", "chunkedData.js", "src/Utils/Animate.jsx", "netlify/functions/similaritySearch.mjs"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/Utils/cv.js", "chunkedData.js", "src/Utils/Animate.jsx", "netlify/functions/similaritySearch.mjs", "src/components/portfolio/Texture.tsx"],
   "exclude": ["node_modules"]
 }

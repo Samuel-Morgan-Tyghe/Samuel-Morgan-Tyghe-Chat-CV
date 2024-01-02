@@ -1,25 +1,32 @@
+import { Box, BoxProps, Center, Flex } from "@chakra-ui/react";
 import {
-  BoxProps,
-  Center,
-  CenterProps,
-  Flex,
-  Image,
-  Text,
-} from "@chakra-ui/react";
-import Container from "@components/grid/Container/Container";
+  PAGE_THEME,
+  THEME_NAMES,
+  getThemeFromPageNumber,
+} from "@components/portfolio/PageThemes";
 import Screen from "@components/portfolio/ScrollingScreen/Screen";
-import { scrollRanges } from "@components/portfolio/ScrollingScreen/scrollUtil";
-import { useScroll } from "framer-motion";
-import { ReactNode, cloneElement, useEffect, useState } from "react";
+import Example from "@components/portfolio/Texture";
+import { ReactNode } from "react";
 import Layout from "src/components/Layout";
-import { usePageNumber } from "~/context/scrollContext";
+import { usePrimaryBreakpoint } from "~/hooks/useCustomBreakpoint";
 
 const Section = ({
   children,
   ...props
 }: { children?: ReactNode } & BoxProps) => (
-  <Center w="100vw" h="100vh" boxShadow={"dark-lg"} {...props}>
+  <Center
+    w="100vw"
+    h="100vh"
+    boxShadow={"dark-lg"}
+    {...props}
+    sx={{
+      "svg, rect, g": { width: "100vw", height: "100vh" },
+      svg: { mixBlendMode: "multiply", px: "0" },
+    }}
+    p="0 !important"
+  >
     {children}
+    <Example width={100} height={100} />
   </Center>
 );
 
@@ -35,31 +42,6 @@ export const pageComponents = [
   [Section, Section, Section],
   [Section, Section, Section],
   [Section, Section, Section],
-  // [
-  //   () => <Section key="4">4</Section>,
-  //   () => <Section key="5">5</Section>,
-  //   () => <Section key="6">6</Section>,
-  // ],
-  // [
-  //   () => <Section key="7">7</Section>,
-  //   () => <Section key="8">8</Section>,
-  //   () => <Section key="9">9</Section>,
-  // ],
-  // [
-  //   () => <Section key="7">7</Section>,
-  //   () => <Section key="8">8</Section>,
-  //   () => <Section key="9">9</Section>,
-  // ],
-  // [
-  //   () => <Section key="7">7</Section>,
-  //   () => <Section key="8">8</Section>,
-  //   () => <Section key="9">9</Section>,
-  // ],
-  // [
-  //   () => <Section key="7">7</Section>,
-  //   () => <Section key="8">8</Section>,
-  //   () => <Section key="9">9</Section>,
-  // ],
 ] as const;
 
 const randomColors = [
@@ -73,162 +55,35 @@ const randomColors = [
 ];
 
 function Portfolio() {
-  const { pageNumber, setPageNumber } = usePageNumber();
-
-  const [activeSection, setActiveSection] = useState(0);
-
-  const totalPageScrollLength = pageComponents.reduce(
-    (acc, sections) => acc + sections.length,
-    0
-  );
-
-  const currentPageScrollLength =
-    pageNumber < pageComponents.length ? pageComponents[pageNumber].length : 0;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const verticalScrollPosition = window?.scrollY ?? 0;
-      const viewportHeight = window?.innerHeight ?? 0;
-      setActiveSection(
-        Math.floor((verticalScrollPosition + 30) / viewportHeight)
-      );
-
-      const scrollPosition = verticalScrollPosition / viewportHeight;
-
-      const currentPage = scrollRanges.findIndex(
-        ({ rangeStart, rangeEnd }) =>
-          scrollPosition >= rangeStart && scrollPosition < rangeEnd
-      );
-
-      // Now set this page number to your Screen component
-      if (currentPage !== -1) {
-        setPageNumber(currentPage);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+  const { x } = usePrimaryBreakpoint();
+  console.log("🚀 ~ file: portfolio.tsx:54 ~ Portfolio ~ x:", x);
   return (
     <Layout>
-      {/* <Center
-        w={activeSection === 1 ? "50vw" : "100vw"}
-        h="100vh"
-        position={"absolute"}
-        right={0}
-      >
-        <PuzzleWelcome
-          {...sectionConfigs[activeSection]}
-          activeSection={activeSection}
-        />
-
-      </Center> */}
-      <Container>
+      <Box sx={{ "&>*": { px: x } }}>
         <Flex
-          // w="100vw"
+          w="100vw"
           h="100vh"
           justifyContent="flex-end"
           alignItems="center"
+          position="fixed"
+          top="0"
+          zIndex={1}
         >
-          <Screen
-            setPageNumber={setPageNumber}
-            pageNumber={pageNumber}
-            activeSection={activeSection}
-            totalPageScrollLength={totalPageScrollLength}
-            currentPageScrollLength={currentPageScrollLength}
-          />
+          <Screen />
         </Flex>
-      </Container>
-      {pageComponents.map((sections, pageIndex) =>
-        sections.map(
-          (Sect, index) => (
+        {pageComponents.map((sections, pageIndex) =>
+          sections.map((Sect, index) => (
             <Sect
               key={`${pageIndex}-${index}`}
-              background={randomColors[pageIndex]}
+              background={getThemeFromPageNumber(pageIndex).background}
+              position={"relative"}
+              px="0"
             />
-          )
-          // cloneElement(section, { key: `${pageIndex}-${index}` })
-        )
-      )}
+          ))
+        )}
+      </Box>
     </Layout>
   );
 }
 
 export default Portfolio;
-
-const sectionConfigs = [
-  {
-    rows: 3,
-    cols: 4,
-    pieceShapes: ["square", "rectangle", "triangle", "circle"],
-    overlap: false,
-    totalWidth: 1000,
-    totalHeight: 562.5,
-    videoUrl: "/video_example2.webm",
-  },
-  {
-    rows: 3,
-    cols: 4,
-    pieceShapes: ["square", "rectangle", "triangle", "circle"],
-    overlap: false,
-    totalWidth: 562.5,
-    totalHeight: 562.5,
-    videoUrl: "/video_example2.webm",
-  },
-  {
-    rows: 3,
-    cols: 4,
-    pieceShapes: ["square", "rectangle", "triangle", "circle"],
-    overlap: false,
-    totalWidth: 1000,
-    totalHeight: 562.5,
-    videoUrl: "/video_example2.webm",
-  },
-  {
-    rows: 3,
-    cols: 4,
-    pieceShapes: ["square", "rectangle", "triangle", "circle"],
-    overlap: false,
-    totalWidth: 1000,
-    totalHeight: 562.5,
-    videoUrl: "/video_example2.webm",
-  },
-  {
-    rows: 3,
-    cols: 4,
-    pieceShapes: ["square", "rectangle", "triangle", "circle"],
-    overlap: false,
-    totalWidth: 1000,
-    totalHeight: 562.5,
-    videoUrl: "/video_example2.webm",
-  },
-  {
-    rows: 3,
-    cols: 4,
-    pieceShapes: ["square", "rectangle", "triangle", "circle"],
-    overlap: false,
-    totalWidth: 1000,
-    totalHeight: 562.5,
-    videoUrl: "/video_example2.webm",
-  },
-  {
-    rows: 3,
-    cols: 4,
-    pieceShapes: ["square", "rectangle", "triangle", "circle"],
-    overlap: false,
-    totalWidth: 1000,
-    totalHeight: 562.5,
-    videoUrl: "/video_example2.webm",
-  },
-  {
-    rows: 3,
-    cols: 4,
-    pieceShapes: ["square", "rectangle", "triangle", "circle"],
-    overlap: false,
-    totalWidth: 1000,
-    totalHeight: 562.5,
-    videoUrl: "/video_example2.webm",
-  },
-];
