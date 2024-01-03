@@ -1,5 +1,5 @@
 import { Box, BoxProps, Center, Flex } from "@chakra-ui/react";
-import {
+import useAnimatedTheme, {
   PAGE_THEME,
   THEME_NAMES,
   getThemeFromPageNumber,
@@ -8,6 +8,7 @@ import Screen from "@components/portfolio/ScrollingScreen/Screen";
 import Example from "@components/portfolio/Texture";
 import { ReactNode } from "react";
 import Layout from "src/components/Layout";
+import { usePageNumber } from "~/context/scrollContext";
 import { usePrimaryBreakpoint } from "~/hooks/useCustomBreakpoint";
 
 const Section = ({
@@ -56,7 +57,9 @@ const randomColors = [
 
 function Portfolio() {
   const { x } = usePrimaryBreakpoint();
-  console.log("🚀 ~ file: portfolio.tsx:54 ~ Portfolio ~ x:", x);
+  const { pageNumber } = usePageNumber();
+
+  const theme = useAnimatedTheme(pageNumber);
   return (
     <Layout>
       <Box sx={{ "&>*": { px: x } }}>
@@ -75,7 +78,7 @@ function Portfolio() {
           sections.map((Sect, index) => (
             <Sect
               key={`${pageIndex}-${index}`}
-              background={getThemeFromPageNumber(pageIndex).background}
+              background={theme.background}
               position={"relative"}
               px="0"
             />

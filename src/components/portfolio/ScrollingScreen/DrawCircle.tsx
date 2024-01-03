@@ -1,4 +1,9 @@
 import { motion } from "framer-motion";
+import { usePageNumber } from "~/context/scrollContext";
+import useAnimatedTheme, {
+  PAGE_THEME,
+  getThemeFromPageNumber,
+} from "../PageThemes";
 const draw = {
   hidden: { pathLength: 0, opacity: 0 },
   visible: (i) => {
@@ -14,6 +19,9 @@ const draw = {
   },
 };
 const DrawCircle = () => {
+  const { pageNumber } = usePageNumber();
+
+  const theme = useAnimatedTheme(pageNumber);
   return (
     <motion.svg
       width="16"
@@ -26,7 +34,7 @@ const DrawCircle = () => {
         cx="100"
         cy="100"
         r="80"
-        stroke="#ff0055"
+        stroke={theme.accent}
         variants={draw}
         custom={1}
       />

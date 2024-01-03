@@ -12,7 +12,10 @@ import Tilty from "react-tilty";
 import { usePageNumber } from "~/context/scrollContext";
 import DrawCircle from "./DrawCircle";
 import { Lefty, Refresh, Righty } from "./Icons";
-import { THEME_NAMES } from "../PageThemes";
+import useAnimatedTheme, {
+  THEME_NAMES,
+  getThemeFromPageNumber,
+} from "../PageThemes";
 
 const Screen = ({ children }: { children?: ReactNode }) => {
   const {
@@ -23,6 +26,7 @@ const Screen = ({ children }: { children?: ReactNode }) => {
     totalPageScrollLength,
     currentPageScrollLength,
   } = usePageNumber();
+  const theme = useAnimatedTheme(pageNumber);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -92,6 +96,30 @@ const Screen = ({ children }: { children?: ReactNode }) => {
       setPageNumber(pageNumber - 1);
     }
   };
+
+  const buttonProps = {
+    "aria-label": "",
+    minW: "30px",
+    minH: "30px",
+    h: "30px",
+    w: "30px",
+    p: "0",
+    bg: theme.accent,
+    variant: "ghost",
+    _hover: {
+      bg: theme.secondary,
+      svg: {
+        "*": {
+          // fill: theme.accent,
+          // strokeColor: theme.accent,
+        },
+      },
+    },
+    _active: {
+      bg: theme.primary,
+    },
+  };
+
   return (
     <Box position="fixed" zIndex={1}>
       <Tilty reverse={true} max={25}>
@@ -100,11 +128,12 @@ const Screen = ({ children }: { children?: ReactNode }) => {
           rounded="14px"
           direction={"column"}
           w={"720px"}
-          maxH="640px"
-          h="min-content"
+          h="640px"
           transform="perspective(800px) rotateY(-10deg)" // Apply 3D rotation
           transformOrigin="right center" // Set the origin of transformation to the right center
-          boxShadow={"dark-lg"}
+          // boxShadow={"dark-lg"}
+          // boxShadow={}
+          filter={`drop-shadow(5px 5px 3px ${theme.accent})`}
         >
           <Flex
             roundedTop="14px"
@@ -113,15 +142,13 @@ const Screen = ({ children }: { children?: ReactNode }) => {
             direction={"column"}
             p="16px"
             gap="16px"
-            position="relative"
           >
-            <Box filter={"blur(4px)"} position={"absolute"} w="100%" h="100%" />
             <Flex
               sx={{
                 "circle, square, line": {
                   strokeWidth: "10px",
                   strokeLinecap: "round",
-                  fill: "transparent",
+                  fill: "transparent !important",
                 },
               }}
             >
@@ -129,28 +156,27 @@ const Screen = ({ children }: { children?: ReactNode }) => {
               <DrawCircle />
               <DrawCircle />
             </Flex>
-            <Flex w="100%" gap="4px">
+            <Flex
+              w="100%"
+              gap="8px"
+              justifyContent={"space-between"}
+              alignItems={"center"}
+            >
               <IconButton
-                variant={"ghost"}
                 icon={<Lefty />}
-                boxSize={"16px"}
-                aria-label={""}
                 onClick={decreasePage}
+                {...buttonProps}
               />
 
               <IconButton
-                variant={"ghost"}
                 icon={<Righty />}
-                boxSize={"16px"}
-                aria-label={""}
                 onClick={increasePage}
+                {...buttonProps}
               />
               <IconButton
-                variant={"ghost"}
                 icon={<Refresh />}
-                boxSize={"16px"}
-                aria-label={""}
                 onClick={handleRefresh}
+                {...buttonProps}
               />
 
               <Box border={"1px solid"} h="16px" w={"100%"} rounded="full" />
@@ -161,7 +187,7 @@ const Screen = ({ children }: { children?: ReactNode }) => {
             overflow="scroll"
             roundedBottom="14px"
             border={"1px solid"}
-            // h=""
+            h="640px"
             ref={targetRef}
           >
             {isLoading ? (

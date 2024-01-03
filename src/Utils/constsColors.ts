@@ -50,3 +50,4 @@ export const colorArray = [
   "#99E6E6",
   "#6666FF",
 ];
+

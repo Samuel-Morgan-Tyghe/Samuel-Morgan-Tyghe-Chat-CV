@@ -1,6 +1,7 @@
-import { useState, useCallback } from "react";
+import { useMotionValue, useSpring } from "framer-motion";
+import { useCallback, useEffect } from "react";
 
-type ColorTheme = {
+export type ColorTheme = {
   primary: string;
   background: string;
   accent: string;
@@ -58,3 +59,52 @@ export const PAGE_THEME = (theme) =>
 export const getThemeFromPageNumber = (pageNumber: number) => {
   return PAGE_THEME(THEME_NAMES[pageNumber]) as ColorTheme;
 };
+
+const hexToNum = (hex: string): number => {
+  return parseInt(hex.replace("#", ""), 16);
+};
+
+// Utility function to convert a numerical value back to an RGB string
+const numToRgbString = (num: number): string => {
+  const r = (num >> 16) & 255;
+  const g = (num >> 8) & 255;
+  const b = num & 255;
+  return `rgb(${r}, ${g}, ${b})`;
+};
+
+const useAnimatedTheme = (pageNumber: number) => {
+  const theme = getThemeFromPageNumber(pageNumber);
+
+  // Create a MotionValue for each color and animate it
+  const accentNum = useMotionValue(hexToNum(theme.accent));
+  const secondaryNum = useMotionValue(hexToNum(theme.secondary));
+  const primaryNum = useMotionValue(hexToNum(theme.primary));
+  const backgroundNum = useMotionValue(hexToNum(theme.background));
+
+  const accentSpring = useSpring(accentNum, { stiffness: 100, damping: 30 });
+  const secondarySpring = useSpring(secondaryNum, {
+    stiffness: 100,
+    damping: 30,
+  });
+  const primarySpring = useSpring(primaryNum, { stiffness: 100, damping: 30 });
+  const backgroundSpring = useSpring(backgroundNum, {
+    stiffness: 100,
+    damping: 30,
+  });
+
+  useEffect(() => {
+    accentNum.set(hexToNum(theme.accent));
+    secondaryNum.set(hexToNum(theme.secondary));
+    primaryNum.set(hexToNum(theme.primary));
+    backgroundNum.set(hexToNum(theme.background));
+  }, [theme, accentNum, secondaryNum, primaryNum, backgroundNum]);
+
+  return {
+    accent: numToRgbString(accentNum.get()),
+    secondary: numToRgbString(secondaryNum.get()),
+    primary: numToRgbString(primaryNum.get()),
+    background: numToRgbString(backgroundNum.get()),
+  };
+};
+
+export default useAnimatedTheme;

@@ -5,7 +5,7 @@ import { Bar } from "@vx/shape";
 import { useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
 import { usePageNumber } from "~/context/scrollContext";
-import { getThemeFromPageNumber } from "./PageThemes";
+import useAnimatedTheme, { getThemeFromPageNumber } from "./PageThemes";
 const defaultMargin = {
   top: 0,
   left: 0,
@@ -64,6 +64,10 @@ export default function Example({
   height: svgHeight,
   margin = defaultMargin,
 }: PatternProps) {
+  const { pageNumber } = usePageNumber();
+
+  const theme = useAnimatedTheme(pageNumber);
+
   const [springNumber, setSpringNumber] = useState(10);
   const numColumns = 3;
   const numRows = 1 / numColumns;
@@ -76,7 +80,6 @@ export default function Example({
     0
   );
 
-  const { pageNumber } = usePageNumber();
   const spring = useSpring(0, { stiffness: 100, damping: 30 });
   useEffect(() => {
     setSpringNumber(pageNumber + 1);
@@ -126,7 +129,7 @@ export default function Example({
               -height / 4
             } , ${height / 2} 0`}
             fill="none"
-            stroke={getThemeFromPageNumber(pageNumber).accent}
+            stroke={theme.accent}
             strokeWidth={1}
           />
         </CustomPattern>
