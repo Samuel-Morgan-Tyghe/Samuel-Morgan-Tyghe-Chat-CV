@@ -1,9 +1,11 @@
 import { Box, BoxProps, Center, Flex } from "@chakra-ui/react";
 import useAnimatedTheme, {
+  ColorTheme,
   PAGE_THEME,
   THEME_NAMES,
   getThemeFromPageNumber,
 } from "@components/portfolio/PageThemes";
+import { ProjectText } from "@components/portfolio/ProjectTexts";
 import Screen from "@components/portfolio/ScrollingScreen/Screen";
 import Example from "@components/portfolio/Texture";
 import { ReactNode } from "react";
@@ -13,20 +15,46 @@ import { usePrimaryBreakpoint } from "~/hooks/useCustomBreakpoint";
 
 const Section = ({
   children,
+  customPX,
+  pageNumber,
+  pageIndex,
+  theme,
   ...props
-}: { children?: ReactNode } & BoxProps) => (
+}: {
+  children?: ReactNode;
+  customPX?: string;
+  pageNumber?: number;
+  pageIndex?: number;
+  theme?: ColorTheme;
+} & BoxProps) => (
   <Center
     w="100vw"
     h="100vh"
-    boxShadow={"dark-lg"}
+    // boxShadow={"dark-lg"}
     {...props}
     sx={{
       "svg, rect, g": { width: "100vw", height: "100vh" },
       svg: { mixBlendMode: "multiply", px: "0" },
     }}
     p="0 !important"
+    position="relative"
   >
     {children}
+    <ProjectText
+      projectKey={THEME_NAMES[pageIndex]}
+      position={"absolute"}
+      top={"50%"}
+      left="0"
+      // left={"50%"}
+      mx={customPX}
+      p="16px"
+      // transform={"translate(-50%, -50%)"}
+      w="40vw"
+      bg={theme.background}
+      zIndex={1}
+      color={theme.primary}
+      rounded={"14px"}
+    />
     <Example width={100} height={100} />
   </Center>
 );
@@ -37,13 +65,7 @@ export const pageComponents = [
   [Section, Section, Section],
   [Section, Section, Section],
   [Section, Section, Section],
-  [Section, Section, Section],
-  [Section, Section, Section],
-  [Section, Section, Section],
-  [Section, Section, Section],
-  [Section, Section, Section],
-  [Section, Section, Section],
-] as const;
+];
 
 const randomColors = [
   "red",
@@ -81,6 +103,9 @@ function Portfolio() {
               background={theme.background}
               position={"relative"}
               px="0"
+              customPX={x}
+              pageIndex={pageIndex}
+              theme={theme}
             />
           ))
         )}

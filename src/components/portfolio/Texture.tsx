@@ -19,46 +19,6 @@ export type PatternProps = {
   margin?: typeof defaultMargin;
 };
 
-// const Patterns = [
-//   ({ id, spring = 10, strokeColor }) => {
-//     const width = 10;
-//     const height = 10;
-
-//     const duration = 10 / spring;
-
-//     return (
-//       <CustomPattern id={id} width={width} height={height}>
-//         <animateTransform
-//           attributeType="xml"
-//           attributeName="patternTransform"
-//           type="translate"
-//           from="0 0"
-//           to="50 0"
-//           dur={`${duration}s`}
-//           repeatCount="indefinite"
-//         />
-//         <path
-//           d={`M 0 ${height / 2} c ${height / 8} ${-height / 4} , ${
-//             (height * 3) / 8
-//           } ${-height / 4} , ${height / 2} 0
-//                c ${height / 8} ${height / 4} , ${(height * 3) / 8} ${
-//             height / 4
-//           } , ${height / 2} 0 M ${-height / 2} ${height / 2}
-//                c ${height / 8} ${height / 4} , ${(height * 3) / 8} ${
-//             height / 4
-//           } , ${height / 2} 0 M ${height} ${height / 2}
-//                c ${height / 8} ${-height / 4} , ${(height * 3) / 8} ${
-//             -height / 4
-//           } , ${height / 2} 0`}
-//           fill="none"
-//           stroke={strokeColor}
-//           strokeWidth={1}
-//         />
-//       </CustomPattern>
-//     );
-//   },
-// ];
-
 export default function Example({
   width: svgWidth,
   height: svgHeight,

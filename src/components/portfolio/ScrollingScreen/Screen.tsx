@@ -40,8 +40,7 @@ const Screen = ({ children }: { children?: ReactNode }) => {
       );
       const scrollPRelative =
         value * (totalPageScrollLength / currentPageScrollLength) - pageNumber;
-
-      setPageNumber(pageNumber);
+      if (pageNumber < 5) setPageNumber(pageNumber);
 
       if (targetRef.current) {
         const targetScrollMax =

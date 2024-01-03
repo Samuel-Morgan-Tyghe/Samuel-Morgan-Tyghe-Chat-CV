@@ -9,7 +9,7 @@ export type ColorTheme = {
   highlight: string;
 };
 
-export const THEME_NAMES = ["CB", "CG", "SS", "SOGP", "COTY"];
+export const THEME_NAMES = ["CB", "CG", "SS", "SOGP", "COTY"] as const;
 
 export const PAGE_THEME = (theme) =>
   ({
@@ -80,6 +80,7 @@ const useAnimatedTheme = (pageNumber: number) => {
   const secondaryNum = useMotionValue(hexToNum(theme.secondary));
   const primaryNum = useMotionValue(hexToNum(theme.primary));
   const backgroundNum = useMotionValue(hexToNum(theme.background));
+  const highlightNum = useMotionValue(hexToNum(theme.highlight));
 
   const accentSpring = useSpring(accentNum, { stiffness: 100, damping: 30 });
   const secondarySpring = useSpring(secondaryNum, {
@@ -91,19 +92,25 @@ const useAnimatedTheme = (pageNumber: number) => {
     stiffness: 100,
     damping: 30,
   });
+  const highlightSpring = useSpring(highlightNum, {
+    stiffness: 100,
+    damping: 30,
+  });
 
   useEffect(() => {
     accentNum.set(hexToNum(theme.accent));
     secondaryNum.set(hexToNum(theme.secondary));
     primaryNum.set(hexToNum(theme.primary));
     backgroundNum.set(hexToNum(theme.background));
-  }, [theme, accentNum, secondaryNum, primaryNum, backgroundNum]);
+    highlightNum.set(hexToNum(theme.highlight));
+  }, [theme, accentNum, secondaryNum, primaryNum, backgroundNum, highlightNum]);
 
   return {
     accent: numToRgbString(accentNum.get()),
     secondary: numToRgbString(secondaryNum.get()),
     primary: numToRgbString(primaryNum.get()),
     background: numToRgbString(backgroundNum.get()),
+    highlight: numToRgbString(highlightNum.get()),
   };
 };
 
