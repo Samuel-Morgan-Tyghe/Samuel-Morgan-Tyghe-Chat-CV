@@ -1,5 +1,5 @@
 import { useMotionValue, useSpring } from "framer-motion";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 
 export type ColorTheme = {
   primary: string;
@@ -9,7 +9,14 @@ export type ColorTheme = {
   highlight: string;
 };
 
-export const THEME_NAMES = ["CB", "CG", "SS", "SOGP", "COTY"] as const;
+export const THEME_NAMES = [
+  "CB",
+  "CG",
+  "ISFSC",
+  "SOGP",
+  "COTY",
+  "STOCKNET",
+] as const;
 
 export const PAGE_THEME = (theme) =>
   ({
@@ -27,7 +34,7 @@ export const PAGE_THEME = (theme) =>
       secondary: "#636366",
       highlight: "#3CB83C",
     },
-    SS: {
+    ISFSC: {
       primary: "#252525",
       background: "#FFFFFF",
       accent: "#65AC65",
@@ -47,6 +54,13 @@ export const PAGE_THEME = (theme) =>
       accent: "#009688",
       secondary: "#757575",
       highlight: "#FFC107",
+    },
+    STOCKNET: {
+      primary: "#2E384D",
+      background: "#F4F7FA",
+      accent: "#10A5F5",
+      secondary: "#68768A",
+      highlight: "#FFFFFF",
     },
   }[theme] ?? {
     primary: "#0F1526",

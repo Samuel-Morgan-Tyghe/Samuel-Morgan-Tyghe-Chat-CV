@@ -10,12 +10,9 @@ import { useScroll, useSpring } from "framer-motion";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import Tilty from "react-tilty";
 import { usePageNumber } from "~/context/scrollContext";
+import useAnimatedTheme, { THEME_NAMES } from "../PageThemes";
 import DrawCircle from "./DrawCircle";
 import { Lefty, Refresh, Righty } from "./Icons";
-import useAnimatedTheme, {
-  THEME_NAMES,
-  getThemeFromPageNumber,
-} from "../PageThemes";
 
 const Screen = ({ children }: { children?: ReactNode }) => {
   const {
@@ -40,7 +37,7 @@ const Screen = ({ children }: { children?: ReactNode }) => {
       );
       const scrollPRelative =
         value * (totalPageScrollLength / currentPageScrollLength) - pageNumber;
-      if (pageNumber < 5) setPageNumber(pageNumber);
+      if (pageNumber < 6) setPageNumber(pageNumber);
 
       if (targetRef.current) {
         const targetScrollMax =
@@ -63,7 +60,7 @@ const Screen = ({ children }: { children?: ReactNode }) => {
   useEffect(() => {
     const unsubscribe = spring.onChange((value) => {
       if (targetRef.current) {
-        targetRef.current.scrollTop = value;
+        // targetRef.current.scrollTop = value;
       }
     });
 
@@ -120,7 +117,7 @@ const Screen = ({ children }: { children?: ReactNode }) => {
   };
 
   return (
-    <Box position="fixed" zIndex={1}>
+    <Box zIndex={1}>
       <Tilty reverse={true} max={25}>
         <Flex
           overflow={"hidden"}
